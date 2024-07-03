@@ -1,0 +1,8 @@
+version: v0.1
+testName: mpnploadtest
+testPlan: LoadTestScript.jmx
+description: 'CI/CD Test Run for MP&P load test'
+engineInstances: 1
+failureCriteria:
+  - avg(response_time_ms) > 600
+  - percentage(error) > 10

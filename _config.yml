@@ -1,0 +1,25 @@
+title: Accelerate developer productivity
+description: This lab walks you through accelerating developer productivity with GitHub Copilot and Dev Box.
+theme: just-the-docs
+
+# url: https://microsoft.github.io/TechExcel-Accelerate-developer-productivity-with-GitHub-Copilot-and-Dev-Box/
+
+aux_links:
+  "TechExcel: Accelerate developer productivity with GitHub Copilot and Dev Box": 
+    - "https://github.com/microsoft/TechExcel-Accelerate-developer-productivity-with-GitHub-Copilot-and-Dev-Box"
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note 
+    color: purple
+  warning:
+    title: Warning
+    color: red

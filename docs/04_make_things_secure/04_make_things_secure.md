@@ -15,7 +15,6 @@ Repository security is something development teams may overlook. In this exercis
 
 After you complete this lab, you will be able to:
 
-* Protect important branches in GitHub repositories
 * Create a security policy for a GitHub repository
 * Enable Depandabot alerts on a GitHub repository
 * Create outside-in availability testing via Application Insights

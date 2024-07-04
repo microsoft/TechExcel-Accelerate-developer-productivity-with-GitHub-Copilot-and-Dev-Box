@@ -2,17 +2,17 @@ name: .NET CI
 
 env:
   registryName: {your_registry_name}.azurecr.io
-  repositoryName: techboost/dotnetcoreapp
-  dockerFolderPath: ./Application/src/RazorPagesTestSample
+  repositoryName: techexcel/dotnetcoreapp
+  dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
 
 on:
   push:
     branches: [ main ]
-    paths: Application/**
+    paths: src/Application/**
   pull_request:
     branches: [ main ]
-    paths: Application/**
+    paths: src/Application/**
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
@@ -25,14 +25,14 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0
+        dotnet-version: 8.0
     
     - name: Restore dependencies
-      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet build --no-restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+      run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
       
   dockerBuildPush:
     runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: '{your_prefix}-dev'
-          images: {your_registry_name}.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}
+          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -99,7 +99,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-test'
-        images: {your_registry_name}.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}
+        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -120,4 +120,4 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}
+        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

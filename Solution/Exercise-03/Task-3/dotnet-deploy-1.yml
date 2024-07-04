@@ -3,10 +3,10 @@ name: .NET CI
 on:
   push:
     branches: [ main ]
-    paths: Application/**
+    paths: src/Application/**
   pull_request:
     branches: [ main ]
-    paths: Application/**
+    paths: src/Application/**
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
@@ -20,8 +20,8 @@ jobs:
       uses: actions/setup-dotnet@v3
    
     - name: Restore dependencies
-      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet build --no-restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+      run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj

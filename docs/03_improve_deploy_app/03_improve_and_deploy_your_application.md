@@ -22,7 +22,8 @@ After you complete this lab, you will be able to:
 * Deploy Azure resources using a Bicep script in a GitHub Actions workflow
 * Deploy containerized .NET applications as part of a build process
 * Implement Continuous Integration (CI) and Continuous Delivery (CD) with GitHub Actions workflows
+* Protect important branches in GitHub repositories
 
 ## Lab Duration
 
-* **Estimated Time:** 75 minutes
+* **Estimated Time:** 95 minutes

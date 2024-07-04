@@ -35,5 +35,5 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
-        template: ./InfrastructureAsCode/main.bicep
+        template: ./src/InfrastructureAsCode/main.bicep
         parameters: environment=${{ github.event.inputs.appenv }}

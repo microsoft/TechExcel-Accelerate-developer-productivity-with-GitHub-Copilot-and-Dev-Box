@@ -18,7 +18,7 @@ After you complete this lab, you will be able to:
 * Clone an existing GitHub repository for your own use
 * Add team members to your GitHub repository
 * Build out a Kanban project board, including assigning issues to team members
-* Create a GitHub Actions workflow
+* Create a GitHub Actions workflow using GitHub Copilot
 
 ## Lab Duration
 

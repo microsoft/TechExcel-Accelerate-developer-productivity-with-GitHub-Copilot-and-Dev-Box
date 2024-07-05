@@ -17,7 +17,6 @@ Along the way, you will also have an opportunity to use GitHub Copilot to assist
 
 After you complete this lab, you will be able to:
 
-* Install and use the GitHub Copilot extension for Visual Studio Code
 * Modify a .NET application by following the GitFlow workflow
 * Deploy Azure resources using a Bicep script in a GitHub Actions workflow
 * Deploy containerized .NET applications as part of a build process

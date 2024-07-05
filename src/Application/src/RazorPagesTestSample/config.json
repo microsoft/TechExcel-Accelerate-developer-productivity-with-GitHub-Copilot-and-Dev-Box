@@ -1,0 +1,5 @@
+{
+    "storage_token": "?sv=2023-01-03&ss=btqf&srt=sco&st=2024-07-04T22%3A21%3A12Z&se=2024-07-05T22%3A21%3A12Z&sp=rl&sig=dv0cd53k6yEHx4exj0OjAvDPVVB2DurQ1xdsoF%2B3%2BOc%3D",
+    "storage_type": "AzureBlobStorage",
+    "storage_account": "mpnplocalstorage"
+}

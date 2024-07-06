@@ -1,3 +1,5 @@
+name: Azure Bicep-Advanced
+
 on:
   workflow_dispatch:
    inputs:
@@ -9,7 +11,6 @@ on:
         - test
         - prod
 
-name: Azure Bicep-Advanced
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,7 +23,7 @@ jobs:
     - uses: actions/checkout@main
 
       # Log into Azure
-    - uses: azure/login@v1
+    - uses: azure/login@v2.1.1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}

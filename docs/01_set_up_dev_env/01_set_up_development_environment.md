@@ -19,12 +19,10 @@ Within Microsoft Azure, Microsoft has created Microsoft Dev Box as a solution fo
 
 After you complete this lab, you will be able to:
 
-TODO:
 * Set up an Azure environment to use Microsoft Dev Box
-* Create a virtual machine image you can use for subsequent exercises
-* Deploy a Microsoft Dev Box using the virtual machine image you have created
+* Deploy a Microsoft Dev Box using a standard virtual machine template
 * Install and use the GitHub Copilot extension for Visual Studio Code
 
 ## Lab Duration
 
-* **Estimated Time:** 135 minutes
+* **Estimated Time:** 75 minutes

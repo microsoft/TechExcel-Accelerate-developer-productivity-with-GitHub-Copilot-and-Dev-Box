@@ -20,9 +20,9 @@ After you complete this lab, you will be able to:
 
 * Use Application Insights to find a performance issue.
 * Use GitHub Copilot to discover code and improve the performance of existing code.
-* ??? 0503
-* ??? 0504
+* Deploy resources like Azure Cache for Redis as part of an existing infrastructure as code solution.
+* Ensure .NET unit tests are running as part of the automated build process.
 
 ## Lab Duration
 
-* **Estimated Time:** TODO
+* **Estimated Time:** 90 minutes

@@ -1,0 +1,26 @@
+name: My First Workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "Step 1 complete"
+      - name: Step 2
+        run: echo "Step 2 complete"
+
+  cow:
+    name: Cowsays
+    runs-on: ubuntu-latest
+    steps:
+    - name: Ship it
+      uses: mscoutermarsh/cowsays-action@master
+      with:
+        text: 'Ready for prod–ship it!'
+        color: 'red'

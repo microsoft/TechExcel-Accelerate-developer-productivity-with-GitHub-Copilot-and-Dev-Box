@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using RazorPagesTestSample.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesTestSample.Tests.UnitTests
 {
@@ -124,6 +125,49 @@ namespace RazorPagesTestSample.Tests.UnitTests
                     expectedMessages.OrderBy(m => m.Id).Select(m => m.Text), 
                     actualMessages.OrderBy(m => m.Id).Select(m => m.Text));
             }
+        }
+        #endregion
+
+        #region snippet5
+        [Theory]
+        [InlineData(150, true)]
+        [InlineData(199, true)]
+        [InlineData(200, true)]
+        [InlineData(201, true)]
+        [InlineData(249, true)]
+        [InlineData(250, true)]
+        [InlineData(251, false)]
+        [InlineData(300, false)]
+        public void Message_LengthValidation(int length, bool isValid)
+        {
+            // Arrange
+            var message = new Message
+            {
+                Id = 1,
+                Text = new string('a', length)
+            };
+
+            // Act
+            var validationResults = ValidateModel(message);
+
+            // Assert
+            if (isValid)
+            {
+                Assert.Empty(validationResults);
+            }
+            else
+            {
+                Assert.NotEmpty(validationResults);
+                Assert.Contains(validationResults, v => v.ErrorMessage.Contains("250 character limit"));
+            }
+        }
+
+        private IList<ValidationResult> ValidateModel(object model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(model, null, null);
+            Validator.TryValidateObject(model, validationContext, validationResults, true);
+            return validationResults;
         }
         #endregion
     }

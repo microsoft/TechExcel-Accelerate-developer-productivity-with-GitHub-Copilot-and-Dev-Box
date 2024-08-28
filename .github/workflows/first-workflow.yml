@@ -54,4 +54,3 @@ jobs:
       with:
         text: 'Ready for prod--ship it!'
         color: 'magenta'
-

@@ -100,6 +100,20 @@ resource appServiceApp 'Microsoft.Web/sites@2020-12-01' = {
     }
 }
 
+resource redisCache 'Microsoft.Cache/Redis@2022-06-01' = {
+  name: '${uniqueString(resourceGroup().id)}-redis'
+  location: location
+  properties: {
+    sku: {
+      name: 'Basic'
+      family: 'C'
+      capacity: 0
+    }
+    enableNonSslPort: false
+    minimumTlsVersion: '1.2'
+  }
+}
+
 output application_name string = appServiceApp.name
 output application_url string = appServiceApp.properties.hostNames[0]
 output container_registry_name string = containerRegistry.name

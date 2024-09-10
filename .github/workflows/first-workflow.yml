@@ -10,6 +10,8 @@ name: First Workflow
   # pull_request
   # schedule
 
+on:
+  workflow-dispatch
 
 # This section covers the work to perform.
 # We include one or more jobs in this section.

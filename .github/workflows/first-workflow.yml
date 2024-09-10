@@ -2,6 +2,8 @@ name: First Workflow
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   job1:
@@ -21,6 +23,3 @@ jobs:
         with:
           text: 'Ready to ship!'
           color: 'magenta'
-
-
-

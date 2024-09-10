@@ -18,7 +18,6 @@ jobs:
     steps:
       - name: Cowsays
         uses: mscoutermarsh/cowsays-action@master 
-        run: echo "Step 2 completed!" 
         with:
           text: 'Ready for prod--ship it!'
           color: 'magenta'  

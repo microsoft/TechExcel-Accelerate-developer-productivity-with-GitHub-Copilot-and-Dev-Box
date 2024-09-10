@@ -14,7 +14,7 @@ on:
   issues:
     types: [opened]
 env:
-   VARIABLE_NAME: value
+   VARIABLE_NAME: 'test123'
 # This section covers the work to perform.
 # We include one or more jobs in this section.
 jobs:
@@ -32,7 +32,7 @@ jobs:
       # default run command will be /bin/bash
       run: |
         echo "Log from step one"
-        echo "env variable value $VARIABLE_NAME"
+        echo "env variable:  $VARIABLE_NAME"
       # This section does not appear in the solution file but demonstrates how to set
       # custom variables that will be available in the run script.
 
@@ -54,5 +54,5 @@ jobs:
       # The 'with' block includes parameters that the workflow will pass
       # to this action. Parameters are all in key-value format.
       with:
-        text: 'Ready for prod--ship it! and use env value ${{ env.VARIABLE_NAME }}'
+        text: 'Ready for prod--ship it! and use env var: ${{ env.VARIABLE_NAME }}'
         color: 'magenta'

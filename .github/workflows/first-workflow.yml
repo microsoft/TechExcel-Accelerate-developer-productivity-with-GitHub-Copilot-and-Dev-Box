@@ -14,4 +14,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Echo phrase for job2
-                run: echo "This is job2"
+              run: echo "This is job2"

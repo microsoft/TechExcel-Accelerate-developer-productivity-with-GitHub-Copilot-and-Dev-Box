@@ -14,9 +14,8 @@ jobs:
 
   job2:
       runs-on: ubuntu-latest
-      name: Cowsays
       steps:
-      - name: Ship it
+      - name: Cowsays Ship it
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: 'Ready to ship!'

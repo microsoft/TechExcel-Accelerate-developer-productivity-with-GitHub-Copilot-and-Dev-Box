@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public class Message
 {
     /// <summary>
-    /// Gets or sets the unique identifier for the message.
+    /// Gets or sets the unique identifier for the message. 
     /// </summary>
     public int Id { get; set; }
 

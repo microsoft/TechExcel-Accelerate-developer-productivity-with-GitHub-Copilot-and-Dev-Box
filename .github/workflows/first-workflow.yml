@@ -7,9 +7,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Echo Command 1 in Job 1
-              run: echo "Step1 complete!"
+              run: echo -e "\033[35mStep1 complete!\033[0m"
             - name: Echo Command 2 in Job 1
-              run: echo "Step2 complete!"
+              run: echo -e "\033[35mStep2 complete!\033[0m"
 
     job2:
         runs-on: ubuntu-latest
@@ -17,4 +17,5 @@ jobs:
             - name: Cowsays
               uses: mscoutermarsh/cowsays-action@v1
               with:
-                text: "Ready for prod–ship it!"
+                text: "\033[35mReady for prod–ship it!\033[0m"
+                run: echo $text

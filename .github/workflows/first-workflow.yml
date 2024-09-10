@@ -1,0 +1,28 @@
+name: First Workflow
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened]
+
+env:
+  MY_VARIABLE: "Hello from the Workflow"
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      MY_VARIABLE: "Hello from Job 1"
+    steps:
+      - name: Echo Job 1 Step 1
+        run: echo "This is Job 1, Step 1"
+      - name: Echo Job 1 Step 2
+        run: echo $MY_VARIABLE
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Job 2 Step 1
+        run: echo "This is Job 2, Step 1"
+      - name: Cowsays Job 2 Step 2
+        run: echo $MY_VARIABLE | cowsay

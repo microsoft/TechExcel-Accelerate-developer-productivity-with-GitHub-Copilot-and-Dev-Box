@@ -1,0 +1,20 @@
+name: First Workflow
+
+on: [push]
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo Command 1 in Job 1
+              run: echo "Step1 complete!"
+            - name: Echo Command 2 in Job 1
+              run: echo "Step2 complete!"
+
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo Command 1 in Job 2
+              run: echo "Step1 complete!"
+            - name: Echo Command 2 in Job 2
+              run: echo "Step2 complete!"

@@ -1,6 +1,6 @@
 name: First Workflow
 
-on: [push]
+on: [push, issues]
 
 jobs:
     job1:

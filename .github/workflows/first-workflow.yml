@@ -13,8 +13,8 @@ jobs:
 
     job2:
         runs-on: ubuntu-latest
-        steps:
-            - name: Echo Command 1 in Job 2
-              run: echo "Step1 complete!"
-            - name: Echo Command 2 in Job 2
-              run: echo "Step2 complete!"
+        steps: 
+            - name: Cowsay Hello
+              uses: peter-evans/cowsay@v1
+              with:
+                  message: "Ready for prod–ship it!"

@@ -17,4 +17,4 @@ jobs:
             - name: Cowsays
               uses: mscoutermarsh/cowsays-action@v1
               with:
-                run: echo "\033[35mReady for prod–ship it!\033[0m"
+                text: "\033[35mReady for prod–ship it!\033[0m"

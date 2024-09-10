@@ -2,6 +2,8 @@ name: First Workflow
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   job1:
@@ -15,6 +17,7 @@ jobs:
         run: echo "Step 2 complete!"
 
   job2:
+    needs: job1
     name: Cowsays
     runs-on: ubuntu-latest
     steps:
@@ -23,3 +26,4 @@ jobs:
       with:
         text: 'ship ship ship!'
         color: 'magenta'
+        

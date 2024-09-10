@@ -13,8 +13,8 @@ jobs:
 
     job2:
         runs-on: ubuntu-latest
-        steps: 
-            - name: Cowsay Hello
-              uses: peter-evans/cowsay@v1
+        steps:
+            - name: Cowsays
+              uses: mscoutermarsh/cowsays-action@v1
               with:
-                  message: "Ready for prod–ship it!"
+                text: "Ready for prod–ship it!"

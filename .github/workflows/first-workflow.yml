@@ -4,18 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Add your build and test steps here
-      - name: Job1
-        runs-on: ubuntu-latest
-        steps:
-          - name: Step 1
+      - name: Step 1
         run: echo "Step 1 complete!"
-          - name: Step 2
+
+      - name: Step 2
         run: echo "Step 2 complete!"

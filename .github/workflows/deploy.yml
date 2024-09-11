@@ -1,4 +1,4 @@
-name: Azure Bicep-Team3
+name: Azure Bicep
 
 on:
   workflow_dispatch

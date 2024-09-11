@@ -11,6 +11,12 @@ on:
     paths:
       - 'src/Application/**'
 
+env:
+  registryName: registryName.azurecr.io
+  repositoryName: techexcel/dotnetcoreapp
+  dockerFolderPath: src/Application/src/RazorPagesTestSample
+  tag: ${{ github.run_number }}
+  
 jobs:
   build:
 

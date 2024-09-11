@@ -58,7 +58,3 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-06-01-pr
   }
 }
 
-//az ad sp create --id dd0d73a2-dd3e-4752-a7eb-8b9c5fefc8bc
-// sp "id": "08f2fb0c-e135-49b5-bacc-8f444275b12a"
-// az ad app federated-credential create --id dd0d73a2-dd3e-4752-a7eb-8b9c5fefc8bc --parameters credentials.json
-//az role assignment create --role contributor --scope /subscriptions/699f3eb4-18f1-491c-ac3a-a7f89f164bd1/resourceGroups/TechExcelTraining-Day2 --subscription 699f3eb4-18f1-491c-ac3a-a7f89f164bd1 --assignee-object-id 08f2fb0c-e135-49b5-bacc-8f444275b12a --assignee-principal-type ServicePrincipal

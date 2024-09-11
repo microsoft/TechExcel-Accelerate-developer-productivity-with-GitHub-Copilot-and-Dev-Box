@@ -1,7 +1,7 @@
 name: .NET CI
 
 env:
-  registryName: {your_registry_name}.azurecr.io
+  registryName: nyompt6i5nxm6mpnpreg.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
@@ -67,7 +67,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://{your_prefix}-dev.azurewebsites.net/
+      url: https://nyompt6i5nxm6-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'
@@ -78,7 +78,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: '{your_prefix}-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: nyompt6i5nxm6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -86,7 +86,7 @@ jobs:
     needs: deploy-to-dev
     environment:
       name: test
-      url: https://{your_prefix}-test.azurewebsites.net/
+      url: https://nyompt6i5nxm6-test.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -98,8 +98,8 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: 'nyompt6i5nxm6-test'
+        images: nyompt6i5nxm6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -107,7 +107,7 @@ jobs:
     needs: deploy-to-test
     environment:
       name: prod
-      url: https://{your_prefix}-prod.azurewebsites.net/
+      url: https://nyompt6i5nxm6-prod.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -119,5 +119,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: 'nyompt6i5nxm6-prod'
+        images: nyompt6i5nxm6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

@@ -15,5 +15,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /out .
 
+# Set the environment variable
+ENV ASPNETCORE_HTTP_PORTS=80
+
 # Set the entry point
 ENTRYPOINT ["dotnet", "RazorPagesTestSample.dll"]

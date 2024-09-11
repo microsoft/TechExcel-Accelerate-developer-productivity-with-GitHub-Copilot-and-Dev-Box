@@ -1,11 +1,11 @@
 name: .NET CI
 
 env:
-  registryName: pgtechexcelteam03.azurecr.io
+  registryName: 5trwfn2pltpqempnpreg.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
-  my_prefix: pgtechexcelteam03
-  my_registry_name: pgtechexcelteam03
+  my_prefix: 5trwfn2pltpqempnpreg
+  my_registry_name: 5trwfn2pltpqempnpreg
   tag: ${{github.run_number}}
 
 on:

@@ -18,6 +18,9 @@
       # We run this on an Ubuntu-based GitHub hosted runner. This hosted runner
       # has certain software already installed, including az cli
       runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        id-token: write
       steps:
       # Check out the code. This grabs code from the repository and
       # makes it available to the GitHub hosted runner. It will usually be the

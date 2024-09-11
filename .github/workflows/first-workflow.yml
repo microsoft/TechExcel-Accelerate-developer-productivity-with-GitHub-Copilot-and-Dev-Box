@@ -9,10 +9,11 @@ name: First Workflow
   # push
   # pull_request
   # schedule
+
 on:
-  workflow_dispatch:
   issues:
-    types: [opened]
+    types:
+      - opened
 
 # This section covers the work to perform.
 # We include one or more jobs in this section.

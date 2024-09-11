@@ -1,17 +1,23 @@
 name: First Workflow
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
-    job1:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Echo Job 1
-                run: echo "This is job 1"
+  job1:
+    runs-on: ubuntu-latest
 
-    job2:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Echo Job 2
-                run: echo "This is job 2"
+    steps:
+    - name: Step one
+      run: echo "Log from step one"
+    - name: Step two
+      run: echo "Log from step two"
+      
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step two
+      run: echo "Log from step two"

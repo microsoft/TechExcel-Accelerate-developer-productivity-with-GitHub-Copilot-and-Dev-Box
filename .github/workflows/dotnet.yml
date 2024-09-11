@@ -33,18 +33,6 @@ jobs:
       run: dotnet build --no-restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
-    - uses: actions/github-script@v6
-      if: failure()
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          let body = "${{ env.build_name }} Workflow Failure \n Build Number: ${{ github.run_number }} \n Build Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} \n SHA: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) \n";
-          github.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
-            body: body
-          });
       
   dockerBuildPush:
     runs-on: ubuntu-latest

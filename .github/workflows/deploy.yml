@@ -1,0 +1,52 @@
+  # We only want to run this script manually.
+  on:
+    workflow_dispatch
+
+  # Environment variables are defined in an "env" section.
+  # We set the target environment to dev.
+  # Open the deploy-advanced.yml file to see how we can accept user input
+  # instead of needing to change this file to switch environments.
+  env:
+    targetEnv: dev
+
+  # The overall workflow name will be Azure Bicep. This will show up in the
+  # GitHub Action page.
+  name: Azure Bicep
+  jobs:
+    # This script has one job: build and deploy the IaC resources
+    build-and-deploy:
+      # We run this on an Ubuntu-based GitHub hosted runner. This hosted runner
+      # has certain software already installed, including az cli
+      runs-on: ubuntu-latest
+      steps:
+      # Check out the code. This grabs code from the repository and
+      # makes it available to the GitHub hosted runner. It will usually be the
+      # first task for any workflow
+      - uses: actions/checkout@main
+
+        # Log into Azure using a federated credential. We have already set up the
+        # federation process in a prior step, so we need to pass in the following:
+        # Client ID = Application registration ID
+        # Tenant ID = Application owner organization ID (previously called Tenant ID in Azure)
+        # Subscription ID
+        # https://github.com/azure/login
+      - uses: azure/login@v2.1.1
+        with:
+          client-id: $
+          tenant-id: $
+          subscription-id: $
+          # We also need to ensure that enable-AzPSSession is true. This is important for
+          # using OIDC in Azure. If we were to pass in a client secret instead, we would not need
+          # this setting enabled
+          enable-AzPSSession: true
+
+        # Deploy ARM template
+      - name: Run ARM deploy
+        # https://github.com/azure/arm-deploy
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: $
+          resourceGroupName: $
+          template: ./InfrastructureAsCode/main.bicep
+          # Use the environment variable called targetEnv
+          parameters: environment=$

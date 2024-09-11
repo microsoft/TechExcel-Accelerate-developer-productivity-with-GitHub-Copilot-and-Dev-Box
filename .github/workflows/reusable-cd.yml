@@ -32,7 +32,7 @@ jobs:
     
         - uses: azure/webapps-deploy@v2
           with:
-            app-name: 'techexcel-${{ inputs.environment }}'
+            app-name: 'ghwxvgb4jngfa-${{ inputs.environment }}'
             images: ${{ secrets.ACR_LOGIN_SERVER }}/techexcel/dotnetcoreapp:${{ github.run_number }}
             
     

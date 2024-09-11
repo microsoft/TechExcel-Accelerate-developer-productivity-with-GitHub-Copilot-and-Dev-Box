@@ -12,7 +12,10 @@ on:
 jobs:
     deploy:
       runs-on: ubuntu-latest
-     
+      permissions:
+        contents: read
+        pages: write
+        id-token: write
       environment:
         name: ${{ inputs.environment }}
         url: "https://techexcel-${{ inputs.environment }}.azurewebsites.net/"

@@ -14,6 +14,7 @@
             default: 'dev'
             options:
               - 'dev'
+              - 'test'
               - 'prod'
 
   # Environment variables are defined in an "env" section.

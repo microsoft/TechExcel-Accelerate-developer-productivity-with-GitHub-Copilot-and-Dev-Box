@@ -78,8 +78,7 @@ jobs:
     uses: ./.github/workflows/reusable-cd.yml
     with:
       environment: dev
-    secrets:
-      inherit: true
+    secrets: inherit
 
 #   deploy-to-test:
   

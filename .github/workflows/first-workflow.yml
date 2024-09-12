@@ -32,4 +32,4 @@ jobs:
       - name: Step 1
         run: echo "${{ needs.job1.outputs.myvar }}"
       - name: Step 2
-        run: echo "${{ neds.job1.outputs.test }}"
+        run: echo "${{ needs.job1.outputs.test }}"

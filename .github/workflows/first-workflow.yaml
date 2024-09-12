@@ -1,0 +1,21 @@
+name: First workflow
+
+on:
+    workflow_dispatch:
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo phrase for job1
+              run: echo "This is job1"
+            - name: Echo step is complete for job1
+              run: echo "Step for job1 is complete"
+
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo step is complete for job2
+              run: echo "Step for job2 is complete"
+            - name: Echo another step is complete
+              run: echo "Another step is complete"

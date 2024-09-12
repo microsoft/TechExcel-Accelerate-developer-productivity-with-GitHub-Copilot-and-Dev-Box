@@ -5,7 +5,7 @@ env:
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
-  
+
 on:
   push:
     branches: [ main ]
@@ -35,7 +35,6 @@ jobs:
       run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
       
   dockerBuildPush:
-    
     runs-on: ubuntu-latest
     needs: build
 
@@ -52,7 +51,7 @@ jobs:
         # Username used to log against the Docker registry
         username: ${{ secrets.ACR_USERNAME }}
         # Password or personal access token used to log against the Docker registry
-        password: ${{ secrets.qkycf2fsjozsgmpnpreg }}
+        password: ${{ secrets.ACR_PASSWORD }}
         # Log out from the Docker registry at the end of a job
         logout: true
         
@@ -61,3 +60,64 @@ jobs:
       
     - name: Docker Push
       run: docker push $registryName/$repositoryName:$tag
+
+  deploy-to-dev:
+  
+    runs-on: ubuntu-latest
+    needs: dockerBuildPush
+    environment:
+      name: dev
+      url: https://qkycf2fsjozsg-dev.azurewebsites.net/
+    
+    steps:
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v2.1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'qkycf2fsjozsg-dev'
+          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-test:
+  
+    runs-on: ubuntu-latest
+    needs: deploy-to-dev
+    environment:
+      name: test
+      url: https://qkycf2fsjozsg-test.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2.1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'qkycf2fsjozsg-test'
+        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-prod:
+  
+    runs-on: ubuntu-latest
+    needs: deploy-to-test
+    environment:
+      name: prod
+      url: https://qkycf2fsjozsg-prod.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2.1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'qkycf2fsjozsg-prod'
+        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

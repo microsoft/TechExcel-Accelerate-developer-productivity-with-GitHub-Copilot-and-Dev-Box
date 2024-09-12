@@ -21,8 +21,8 @@ jobs:
         run: echo "TEST=123" >> $GITHUB_ENV
 
     outputs:
-      myvar: ${{ steps.step1.outputs.myvar }}
-      test: ${{ steps.step2.outputs.test }}        
+      myvar: ${{ steps.step1.outputs.MYVAR }}
+      test: ${{ steps.step2.outputs.TEST }}        
 
   job2:
     needs: job1

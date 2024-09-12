@@ -22,7 +22,7 @@ jobs:
 
     outputs:
       myvar: ${{ steps.step1.outputs.MYVAR }}
-      test: ${{ steps.step2.outputs.TEST }}        
+      test: ${{ steps.step2.env.TEST }}        
 
   job2:
     needs: job1

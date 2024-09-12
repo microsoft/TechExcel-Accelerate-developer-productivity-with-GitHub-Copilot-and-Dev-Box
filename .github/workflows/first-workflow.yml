@@ -2,6 +2,9 @@ name: First Workflow
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main  
   issues:
     types: [opened]
 
@@ -10,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1
+        env:
+          MYVAR: "1234"      
         run: echo "This is job1, step 1"
 
       - name: Step 2
@@ -21,6 +26,6 @@ jobs:
 
     steps:
       - name: Step 1
-        run: echo "This is job2, step 1"
+        run: echo "${{ env.MYVAR }}"
       - name: Step 2
         run: echo "${{ env.TEST }}"

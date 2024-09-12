@@ -78,7 +78,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'qkycf2fsjozsg-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -99,7 +99,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'qkycf2fsjozsg-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -120,4 +120,4 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'qkycf2fsjozsg-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

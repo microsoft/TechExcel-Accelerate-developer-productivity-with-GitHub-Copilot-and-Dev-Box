@@ -15,6 +15,7 @@ using Xunit;
 using RazorPagesTestSample.Pages;
 using RazorPagesTestSample.Data;
 
+
 namespace RazorPagesTestSample.Tests.UnitTests
 {
     public class IndexPageTests

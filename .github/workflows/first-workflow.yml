@@ -12,3 +12,14 @@ jobs:
         run: echo Step1 complete!
       - name: Step2
         run: echo Step2 complete!
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Ship it
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: 'Ready for prod–ship it!'
+          color: 'magenta'

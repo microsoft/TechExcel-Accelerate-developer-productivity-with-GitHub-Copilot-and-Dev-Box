@@ -20,7 +20,7 @@ namespace RazorPagesTestSample
         /// </remarks>
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(250, ErrorMessage = "There's a 250 character limit on messages. Please shorten your messages.")]
+        [StringLength(250, ErrorMessage = "There's a 250 character limit on messages. Please shorten your message.")]
         public string Text { get; set; }
     }
 

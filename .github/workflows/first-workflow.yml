@@ -1,0 +1,26 @@
+name: First Workflow
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened]
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "This is job1, step 1"
+
+      - name: Step 2
+        run: echo "test=123" >> $GITHUB_ENV
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1
+        run: echo "This is job2, step 1"
+      - name: Step 2
+        run: echo "$(test)"

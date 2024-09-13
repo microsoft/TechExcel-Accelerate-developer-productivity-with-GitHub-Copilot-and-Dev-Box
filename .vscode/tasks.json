@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Save All Files",
+            "command": "${command:workbench.action.files.saveAll}",
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Project",
+            "dependsOn": "Save All Files",
+            "command": "dotnet build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

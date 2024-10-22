@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cowsays Action
-        uses: scottbrenner/cowsay-action@v1.1.0
+        uses: mscoutermarsh/cowsay-action@master
         with:
           text: "Ready for prod-ship it!"
           color: magenta

@@ -1,0 +1,28 @@
+  on:
+    workflow_dispatch
+
+  env:
+    targetEnv: dev
+
+  name: Azure Bicep
+  jobs:
+
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@main
+
+      - uses: azure/login@v2.1.1
+        with:
+          client-id: ${{ secret.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secret.AZURE_TENANT_ID }}
+          subscription-id: ${{ secret.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      - name: Run ARM deploy
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: $
+          resourceGroupName: $
+          template: ./InfrastructureAsCode/main.bicep
+          parameters: environment=$

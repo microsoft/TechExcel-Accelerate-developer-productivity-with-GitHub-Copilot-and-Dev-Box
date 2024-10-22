@@ -16,6 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cowsays Action
-        uses: mscoutermarsh/cowsay-action@v1
+        uses: mscoutermarsh/cowsays-action@v1
         with:
           color: magenta

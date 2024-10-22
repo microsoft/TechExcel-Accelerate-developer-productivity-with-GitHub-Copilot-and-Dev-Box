@@ -1,4 +1,4 @@
-name: Manual Workflow
+name: First Workflow
 on:
   workflow_dispatch:
 
@@ -7,11 +7,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
     - name: step1
       run: echo "Step 1 complete"
 
     - name: step2
       run: echo "Step 2 complete"
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run Cowsays Action
+      uses: peter-evans/cowsay@v1
+      with:
+        text: "Ready for prod–ship it!"
+        color: magenta

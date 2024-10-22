@@ -17,6 +17,8 @@ namespace RazorPagesTestSample.Data
         /// This property is required and must be a text data type. If the text exceeds 200 characters, an error message will be displayed.
         /// </remarks>
         /// /// /// /// /// /// /// /// [Required]
+        /// [Required]
+        /// New
         [DataType(DataType.Text)]
         [StringLength(200, ErrorMessage = "There's a 200 character limit on messages. Please shorten your message.")]
         public string Text { get; set; }

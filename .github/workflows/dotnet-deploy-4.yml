@@ -1,4 +1,4 @@
-name: .NET CI
+name: .NET CI_wtomaz808
 
 env:
   registryName: onfp77x2viod4.azurecr.io

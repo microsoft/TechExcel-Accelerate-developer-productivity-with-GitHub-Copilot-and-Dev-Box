@@ -5,9 +5,11 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    env:
+      COW_SAYS: "Moo"    
     steps:
     - name: Step one
-      run: echo "Step 1 complete!"
+      run: echo "Step 1 Cow says ${{ env.COW_SAYS }}!"
     - name: Step two
       run: echo "Step 2 complete!"
 

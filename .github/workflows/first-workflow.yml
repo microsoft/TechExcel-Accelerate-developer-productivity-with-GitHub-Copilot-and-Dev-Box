@@ -1,0 +1,17 @@
+name: Manual Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: step1
+      run: echo "Step 1 complete"
+
+    - name: step2
+      run: echo "Step 2 complete"

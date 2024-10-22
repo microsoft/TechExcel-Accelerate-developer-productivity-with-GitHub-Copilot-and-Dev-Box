@@ -1,2 +1,4 @@
 
 .DS_Store
+# Local configuration file for developers
+src/Application/src/RazorPagesTestSample/config.json

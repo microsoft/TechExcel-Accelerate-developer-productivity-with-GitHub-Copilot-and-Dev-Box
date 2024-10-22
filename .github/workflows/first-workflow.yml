@@ -1,6 +1,8 @@
 name: First Workflow
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   job1:
@@ -14,11 +16,12 @@ jobs:
       run: echo "Step 2 complete"
 
   job2:
+    needs: job1
     runs-on: ubuntu-latest
 
     steps:
     - name: Run Cowsays Action
-      uses:  mscoutermarsh/cowsays-action@master
+      uses: mscoutermarsh/cowsays-action@master
       with:
         text: "Ready for prod–ship it!"
         color: magenta

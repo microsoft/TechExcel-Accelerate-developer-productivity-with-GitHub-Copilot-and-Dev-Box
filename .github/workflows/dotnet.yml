@@ -12,10 +12,10 @@ on:
     paths:
     - src/Application/**
     
-defaults:
-  run:
-    shell: bash
-    working-directory: ./src/Application/src/RazorPagesTestSample
+# defaults:
+#   run:
+#     shell: bash
+#     working-directory: ./src/Application/src/RazorPagesTestSample
 
 permissions:
   id-token: write
@@ -61,7 +61,7 @@ jobs:
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
-        context: .
+        context: ./src/Application/src/RazorPagesTestSample
         push: true
         tags: ${{ env.ACR_NAME }}/${{ env.CONTAINER_NAME }}:${{ env.TAG_NAME }}
-        file: ./Dockerfile
+        file: ./src/Application/src/RazorPagesTestSample/Dockerfile

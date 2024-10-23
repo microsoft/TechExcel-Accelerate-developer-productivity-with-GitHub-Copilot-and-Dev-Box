@@ -1,13 +1,16 @@
 # We only want to run this script manually.
 on:
-    workflow_dispatch
+    workflow_dispatch:
+        inputs:
+            targetEnv:
+                description: 'Target environment'
+                required: true
+                default: 'dev'
 
 # Environment variables are defined in an "env" section.
-# We set the target environment to dev.
-# Open the deploy-advanced.yml file to see how we can accept user input
-# instead of needing to change this file to switch environments.
+# We set the target environment to the user input.
 env:
-targetEnv: dev
+    targetEnv: ${{ github.event.inputs.targetEnv }}
 
 # The overall workflow name will be Azure Bicep. This will show up in the
 # GitHub Action page.

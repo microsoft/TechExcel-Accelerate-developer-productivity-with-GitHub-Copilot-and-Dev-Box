@@ -3,7 +3,7 @@ name: .NET CI_wtomaz808
 env:
   registryName: onfp77x2viod4.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
-  dockerFolderPath: ./solution/mysolutions 
+  dockerFolderPath: solution/mysolutions 
   tag: ${{github.run_number}}
 
 on:

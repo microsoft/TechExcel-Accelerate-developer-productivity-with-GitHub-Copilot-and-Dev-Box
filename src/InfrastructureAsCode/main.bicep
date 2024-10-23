@@ -72,6 +72,10 @@ resource webApp 'Microsoft.Web/sites@2022-09-01' = {
         linuxFxVersion: 'DOCKER|${imageName}'
         appCommandLine: startupCommand
         appSettings: [
+          { 
+            name: 'WEBSITES_PORT'
+            value: '8080'
+          }
           {
             name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
             value: 'false'

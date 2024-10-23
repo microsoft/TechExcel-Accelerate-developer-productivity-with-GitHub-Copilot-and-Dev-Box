@@ -49,23 +49,23 @@ resource acr 'Microsoft.ContainerRegistry/registries@2020-11-01-preview' = {
 
 
 // Generate bicep code to create an Azure App Service Plan 
-resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
+resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
   location: location
+  kind: 'linux'
   properties: {
-    name: appServicePlanName
-    reserved: true
-    sku: {
-      name: sku
-      tier: 'Standard'
-      size: 'S1'
-    }
+    zoneRedundant: false
+  }
+  sku: {
+    capacity: 1 
+    tier: 'Standard'
+    size: sku
   }
 }
 
 // Generate bicep code to create an Azure Web App using docker image name imageName and startup command of startupCommand
 
-resource webApp 'Microsoft.Web/sites@2020-06-01' = {
+resource webApp 'Microsoft.Web/sites@2022-09-01' = {
     name: webAppName
     location: location
     properties: {

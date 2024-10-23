@@ -1,0 +1,57 @@
+name: .NET CI_wtomaz8081
+
+env:
+  registryName: onfp77x2viod4.azurecr.io
+  repositoryName: techexcel/dotnetcoreapp
+  dockerFolderPath: ./solution/mysolutions
+  tag: ${{ github.run_number }}
+
+on:
+  push:
+    branches: [ main ]
+    paths: src/Application/**
+  pull_request:
+    branches: [ main ]
+    paths: src/Application/**
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  dockerBuildPush:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Docker Login
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ secrets.ACR_LOGIN_SERVER }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+        
+    - name: Docker Build
+      run: docker build -t ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }} -f ${{ env.dockerFolderPath }}/Dockerfile ${{ env.dockerFolderPath }}
+
+    - name: Docker Push
+      run: docker push ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}
+
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    needs: dockerBuildPush
+    environment:
+      name: prod
+      url: https://pickles808-prod.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2.1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'pickles808-prod'
+        images: ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}

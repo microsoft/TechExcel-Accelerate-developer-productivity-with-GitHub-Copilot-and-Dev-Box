@@ -14,6 +14,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+    - working-directory: ./src/InfrastructureAsCode/
     - uses: actions/checkout@main
   
     - name: Azure login
@@ -29,5 +30,5 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.RG }}
-        template: ./InfrastructureAsCode/main.bicep
+        template: ./main.bicep
         parameters: environment=${{ env.targetEnv }}

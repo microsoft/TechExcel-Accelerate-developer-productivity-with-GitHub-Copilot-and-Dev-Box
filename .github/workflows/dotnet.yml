@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-    - '/src/Application/**'
+    - src/Application/**
   pull_request:
     paths:
-    - '/src/Application/**'
+    - src/Application/**
     
 defaults:
   run:

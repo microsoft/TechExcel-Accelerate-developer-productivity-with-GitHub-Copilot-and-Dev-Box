@@ -15,11 +15,10 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./src/Application
+    working-directory: ./src/Application/src/RazorPagesTestSample
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
 
     steps:

@@ -1,5 +1,5 @@
 @description('Environment of the web app')
-param environment string = 'prod'
+param environment string = 'dev'
 
 @description('Location of services')
 param location string = resourceGroup().location

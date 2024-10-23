@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./src/InfrastructureAsCode 
+        working-directory: 'src/InfrastructureAsCode'
     steps:
     - uses: actions/checkout@main
   
@@ -32,5 +32,5 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.RG }}
-        template: ./main.bicep
+        template: main.bicep
         parameters: environment=${{ env.targetEnv }}

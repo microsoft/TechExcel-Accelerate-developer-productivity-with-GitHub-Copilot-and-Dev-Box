@@ -1,28 +1,33 @@
-  on:
+name: Azure Bicep
+on:
     workflow_dispatch
 
-  env:
-    targetEnv: dev
-
-  name: Azure Bicep
-  jobs:
-
-    build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@main
-
-      - uses: azure/login@v2.1.1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
-
-      - name: Run ARM deploy
-        uses: azure/arm-deploy@v1
-        with:
-          subscriptionId: $
-          resourceGroupName: $
-          template: ./InfrastructureAsCode/main.bicep
-          parameters: environment=$
+env:
+  targetEnv: dev
+  RG: TechExcel_RG
+  
+permissions:
+  id-token: write
+  contents: read
+  
+jobs:  
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+  
+    - name: Azure login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
+  
+    - name: Run ARM deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.RG }}
+        template: ./InfrastructureAsCode/main.bicep
+        parameters: environment=${{ env.targetEnv }}

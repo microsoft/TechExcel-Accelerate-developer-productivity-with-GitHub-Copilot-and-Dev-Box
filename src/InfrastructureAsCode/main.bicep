@@ -103,7 +103,7 @@ resource redisCache 'Microsoft.Cache/Redis@2021-06-01' = {
     sku: {
       name: 'Basic'
       family: 'C'
-      capacity: '0'
+      capacity: 0
     }
     enableNonSslPort: false
   }

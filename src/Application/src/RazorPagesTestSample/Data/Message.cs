@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace RazorPagesTestSample.Data
 {
     #region snippet1

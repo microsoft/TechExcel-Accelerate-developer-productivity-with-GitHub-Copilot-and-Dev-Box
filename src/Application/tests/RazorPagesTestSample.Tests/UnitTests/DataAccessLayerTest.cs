@@ -38,13 +38,14 @@ namespace RazorPagesTestSample.Tests.UnitTests
                 // Arrange
                 var recId = 10;
                 var expectedMessage = new Message() { Id = recId, Text = "Message" };
-
+                var failedMessage = new Message() { Id = recId, Text = "Fake!" };
                 // Act
+                
                 await db.AddMessageAsync(expectedMessage);
 
                 // Assert
                 var actualMessage = await db.FindAsync<Message>(recId);
-                Assert.Equal(expectedMessage, actualMessage);
+                Assert.Equal(failedMessage, actualMessage);
             }
         }
 

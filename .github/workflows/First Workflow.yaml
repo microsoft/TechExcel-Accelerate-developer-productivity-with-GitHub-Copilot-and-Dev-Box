@@ -49,11 +49,11 @@ jobs:
       uses: docker/login-action@v1.9.0
       with:
         # Server address of Docker registry. If not set then will default to Docker Hub
-        registry: ${{ secrets.ACR_LOGIN_SERVER }}
+        registry: q72ttfiegimzempnpreg.azurecr.io
         # Username used to log against the Docker registry
-        username: ${{ secrets.ACR_USERNAME }}
+        username: q72ttfiegimzempnpreg
         # Password or personal access token used to log against the Docker registry
-        password: ${{ secrets.ACR_PASSWORD }}
+        password: e6rxhp57P3UR9+VV64/fvUhFRPA5+zatO5kT7GQETl+ACRB1gASL
         # Log out from the Docker registry at the end of a job
         logout: true
         

@@ -14,7 +14,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - working-directory: ./src/InfrastructureAsCode
     - uses: actions/checkout@main
   
     - name: Azure login
@@ -27,6 +26,7 @@ jobs:
   
     - name: Run ARM deploy
       uses: azure/arm-deploy@v1
+      working-directory: ./src/InfrastructureAsCode
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.RG }}

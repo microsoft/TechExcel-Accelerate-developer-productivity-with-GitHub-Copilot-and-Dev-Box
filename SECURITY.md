@@ -6,6 +6,15 @@ Microsoft takes the security of our software products and services seriously, wh
 
 If you believe you have found a security vulnerability in any Microsoft-owned repository that meets [Microsoft's definition of a security vulnerability](https://aka.ms/security.md/definition), please report it to us as described below.
 
+## Supported Versions
+
+We release patches for security vulnerabilities in the following versions:
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x     | :white_check_mark: |
+| 0.x     | :x:                |
+
 ## Reporting Security Issues
 
 **Please do not report security vulnerabilities through public GitHub issues.**
@@ -38,4 +47,5 @@ We prefer all communications to be in English.
 
 Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://aka.ms/security.md/cvd).
 
+We will respond to your report within 48 hours and keep you updated on the progress. We appreciate your help in keeping our project secure.
 <!-- END MICROSOFT SECURITY.MD BLOCK -->

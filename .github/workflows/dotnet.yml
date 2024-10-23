@@ -1,0 +1,89 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+    - src/Application/**
+  pull_request:
+    paths:
+    - src/Application/**
+    
+# defaults:
+#   run:
+#     shell: bash
+#     working-directory: ./src/Application/src/RazorPagesTestSample
+
+permissions:
+  id-token: write
+  contents: read
+  
+env:
+  ACR_NAME: 'f3jiczwhl7laimpnpreg.azurecr.io'
+  CONTAINER_NAME: 'razorpagestestsample'
+  WEB_APP_NAME: 'f3jiczwhl7lai-dev'
+  TAG_NAME: ${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v4
+    #   with:
+    #     dotnet-version: 8.0.x
+    # - name: Restore dependencies
+    #   run: dotnet restore
+    # - name: Build
+    #   run: dotnet build --no-restore
+    # - name: Test
+    #   run: dotnet test --no-build --verbosity normal
+
+    - name: Azure login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
+
+    - name: Log into registry ACR
+      uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+      with:
+        registry: ${{ env.ACR_NAME }}
+        username: ${{ secrets.AZURE_CLIENT_ID }}
+        password: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v2
+      with:
+        context: ./src/Application/src/RazorPagesTestSample
+        push: true
+        tags: ${{ env.ACR_NAME }}/${{ env.CONTAINER_NAME }}:${{ env.TAG_NAME }}
+        file: ./src/Application/src/RazorPagesTestSample/Dockerfile
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Azure login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
+
+    - name: Deploys to WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.WEB_APP_NAME }}
+        images: '${{ env.ACR_NAME }}/${{ env.CONTAINER_NAME }}:${{ env.TAG_NAME }}'

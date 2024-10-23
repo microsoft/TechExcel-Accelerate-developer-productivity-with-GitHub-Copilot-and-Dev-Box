@@ -1,0 +1,12 @@
+# Specify owners for all files
+*      @briandenicola
+
+# Specify owners for specific directories
+/src/  @briandenicola
+
+# Specify owners for specific files
+#/scripts/deploy.sh @devops-owner
+
+# Specify owners for files with specific extensions
+#*.js    @js-owner
+#*.css   @css-owner

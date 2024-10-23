@@ -13,9 +13,6 @@ permissions:
 jobs:  
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'src/InfrastructureAsCode'
     steps:
     - uses: actions/checkout@main
   
@@ -32,5 +29,5 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.RG }}
-        template: main.bicep
+        template: ./src/InfrastructureAsCode/main.bicep
         parameters: environment=${{ env.targetEnv }}

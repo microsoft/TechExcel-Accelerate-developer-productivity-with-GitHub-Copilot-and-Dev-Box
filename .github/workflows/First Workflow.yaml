@@ -71,15 +71,14 @@ jobs:
       name: dev
       url: https://monusonu-dev.azurewebsites.net/
 
-
-   
+  
     
     steps:
       - name: 'Login via Azure CLI'
         uses: azure/login@v2.1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          tenant: 16b3c013-d300-468d-ac64-7eda0820b6d3
+         
       - name: 'Set Azure Subscription'
         run: az account set --subscription 603ecea2-5a0b-430a-9ebe-c3a104afbdfa
       
@@ -124,7 +123,7 @@ jobs:
       uses: azure/login@v2.1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        tenant: 16b3c013-d300-468d-ac64-7eda0820b6d3
+
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'monusonu-prod'

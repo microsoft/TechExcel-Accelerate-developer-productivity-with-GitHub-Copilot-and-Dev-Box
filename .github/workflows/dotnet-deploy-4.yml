@@ -1,9 +1,9 @@
-name: .NET CI_wtomaz808
+name: .NET CI_deploy1
 
 env:
   registryName: onfp77x2viod4.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
-  dockerFolderPath: solution/mysolutions 
+  dockerFolderPath: ./solution/src/mysolution
   tag: ${{github.run_number}}
 
 on:

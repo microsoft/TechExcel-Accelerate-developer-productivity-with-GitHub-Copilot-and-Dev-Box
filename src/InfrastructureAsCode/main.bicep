@@ -54,12 +54,10 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   location: location
   kind: 'linux'
   properties: {
-    zoneRedundant: false
+    reserved: true
   }
   sku: {
-    capacity: 1 
-    tier: 'Standard'
-    size: sku
+    name: sku
   }
 }
 

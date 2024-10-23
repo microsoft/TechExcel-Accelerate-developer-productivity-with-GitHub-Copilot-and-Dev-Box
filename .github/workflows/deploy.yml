@@ -1,0 +1,31 @@
+name: Deploy to Azure
+
+on:
+  workflow_dispatch:
+
+env:
+  targetEnv: dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+
+      - name: Log in to Azure
+        uses: azure/login@v2.1.1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      - name: Deploy ARM Template
+        uses: azure/arm-deploy@v1
+        with:
+          scope: subscription
+          template: ./src/InfrastructureAsCode/main.bicep
+          deployment-name: arm-deployment
+          parameters: environment=${{ env.targetEnv }}

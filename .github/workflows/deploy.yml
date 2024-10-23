@@ -1,54 +1,40 @@
-# We only want to run this script manually.
+name: Azure Bicep-Advanced
+
 on:
-    workflow_dispatch:
-        inputs:
-            targetEnv:
-                description: 'Target environment'
-                required: true
-                default: 'dev'
+  workflow_dispatch:
+   inputs:
+    appenv:
+      type: choice
+      description: Choose the target environment
+      options: 
+        - dev
+        - test
+        - prod
 
-# Environment variables are defined in an "env" section.
-# We set the target environment to the user input.
-env:
-    targetEnv: ${{ github.event.inputs.targetEnv }}
-
-# The overall workflow name will be Azure Bicep. This will show up in the
-# GitHub Action page.
-name: Azure Bicep
 jobs:
-# This script has one job: build and deploy the IaC resources
-build-and-deploy:
-    # We run this on an Ubuntu-based GitHub hosted runner. This hosted runner
-    # has certain software already installed, including az cli
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
-    # Check out the code. This grabs code from the repository and
-    # makes it available to the GitHub hosted runner. It will usually be the
-    # first task for any workflow
+    # Checkout code
     - uses: actions/checkout@main
 
-    # Log into Azure using a federated credential. We have already set up the
-    # federation process in a prior step, so we need to pass in the following:
-    # Client ID = Application registration ID
-    # Tenant ID = Application owner organization ID (previously called Tenant ID in Azure)
-    # Subscription ID
-    # https://github.com/azure/login
+      # Log into Azure
     - uses: azure/login@v2.1.1
-    with:
-        client-id: $
-        tenant-id: $
-        subscription-id: $
-        # We also need to ensure that enable-AzPSSession is true. This is important for
-        # using OIDC in Azure. If we were to pass in a client secret instead, we would not need
-        # this setting enabled
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true
 
-    # Deploy ARM template
+      # Deploy ARM template
     - name: Run ARM deploy
-    uses: azure/arm-deploy@v1
-    with:
-    subscriptionId: $
-    resourceGroupName: $
-    template: ./InfrastructureAsCode/main.bicep
-    # Use the environment variable called targetEnv
-    parameters: environment=$
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./src/InfrastructureAsCode/main.bicep
+        parameters: environment=${{ github.event.inputs.appenv }}

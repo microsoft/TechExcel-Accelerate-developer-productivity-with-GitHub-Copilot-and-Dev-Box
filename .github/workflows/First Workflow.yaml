@@ -1,56 +1,125 @@
-# The name of the job is what will display on the GitHub repository in the Actions tab.
-name: First Workflow
+name: .NET CI
 
-# The 'on' section tells GitHub under what conditions we want to run this workflow.
-# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-# Common scenarios include:
-  # workflow-dispatch (manual execution)
-  # issues
-  # push
-  # pull_request
-  # schedule
+env:
+  registryName: q72ttfiegimzempnpreg.azurecr.io
+  repositoryName: techexcel/dotnetcoreapp
+  dockerFolderPath: ./src/Application/src/RazorPagesTestSample
+  tag: ${{github.run_number}}
+
 on:
+  push:
+    branches: [ main ]
+    paths:
+      - src/Application/**
+  pull_request:
+    branches: [ main ]
+    paths:
+      - src/Application/**
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  issues:
-    types: [opened]
-
-# This section covers the work to perform.
-# We include one or more jobs in this section.
 jobs:
-  # Each individual job will include details like execution order,
-  # pre-requisite jobs, and execution platform.
-  job1:
-    # We can run jobs on GitHub hosted VM runners in Windows, Ubuntu, and Mac OS.
-    # We can also run jobs on self-hosted hardware.
-    runs-on: ubuntu-latest
+  build:
 
-    # Each job contains one or more steps. A step needs to have at least a name and a command.
-    steps:
-    - name: Step one
-      # The 'run' command executes a shell or command script. Because this is Ubuntu, the
-      # default run command will be /bin/bash
-      run: echo "Log from step one"
-      # This section does not appear in the solution file but demonstrates how to set
-      # custom variables that will be available in the run script.
-      env:
-        VARIABLE_NAME: value
-    - name: Step two
-      run: echo "Log from step two"
-      
-  job2:
-    # Job 2 will only run after job 1 completes.
-    # Removing this 'needs' section would make the jobs run simultaneously.
-    needs: job1
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cowsays
-      # The 'uses' command executes a remote GitHub action.
-      # A command like mscoutermarsh/cowsays-action means you can
-      # find this code at https://github.com/mscoutermarsh/cowsays-action
-      uses: mscoutermarsh/cowsays-action@master
-      # The 'with' block includes parameters that the workflow will pass
-      # to this action. Parameters are all in key-value format.
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        text: 'Ready for prod--ship it!'
-        color: 'magenta'
+        dotnet-version: 8.0
+    
+    - name: Restore dependencies
+      run: dotnet restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Build
+      run: dotnet build --no-restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+      
+  dockerBuildPush:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Docker Login
+      # You may pin to the exact commit or the version.
+      # uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+      uses: docker/login-action@v1.9.0
+      with:
+        # Server address of Docker registry. If not set then will default to Docker Hub
+        registry: ${{ secrets.ACR_LOGIN_SERVER }}
+        # Username used to log against the Docker registry
+        username: ${{ secrets.ACR_USERNAME }}
+        # Password or personal access token used to log against the Docker registry
+        password: ${{ secrets.ACR_PASSWORD }}
+        # Log out from the Docker registry at the end of a job
+        logout: true
+        
+    - name: Docker Build
+      run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
+      
+    - name: Docker Push
+      run: docker push $registryName/$repositoryName:$tag
+
+  deploy-to-dev:
+  
+    runs-on: ubuntu-latest
+    needs: dockerBuildPush
+    environment:
+      name: dev
+      url: https://{your_prefix}-dev.azurewebsites.net/
+    
+    steps:
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v2.1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: '{your_prefix}-dev'
+          images: q72ttfiegimzempnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-test:
+  
+    runs-on: ubuntu-latest
+    needs: deploy-to-dev
+    environment:
+      name: test
+      url: https://{your_prefix}-test.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2.1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: '{your_prefix}-test'
+        images: q72ttfiegimzempnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-prod:
+  
+    runs-on: ubuntu-latest
+    needs: deploy-to-test
+    environment:
+      name: prod
+      url: https://{your_prefix}-prod.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2.1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: '{your_prefix}-prod'
+        images: q72ttfiegimzempnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

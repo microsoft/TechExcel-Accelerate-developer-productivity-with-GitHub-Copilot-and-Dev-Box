@@ -10,6 +10,8 @@ var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
 var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
 var sku = 'S1'
 var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
+var redisCacheName = '${uniqueString(resourceGroup().id)}-mpnp-cache'
+
 var registrySku = 'Standard'
 var imageName = 'techexcel/dotnetcoreapp'
 var startupCommand = ''
@@ -64,27 +66,41 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
 // Generate bicep code to create an Azure Web App using docker image name imageName and startup command of startupCommand
 
 resource webApp 'Microsoft.Web/sites@2022-09-01' = {
-    name: webAppName
-    location: location
-    properties: {
-      serverFarmId: appServicePlan.id
-      siteConfig: {
-        linuxFxVersion: 'DOCKER|${imageName}'
-        appCommandLine: startupCommand
-        appSettings: [
-          { 
-            name: 'WEBSITES_PORT'
-            value: '8080'
-          }
-          {
-            name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
-            value: 'false'
-          }
-          {
-            name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-            value: appInsights.properties.InstrumentationKey
-          }
-        ]
-      }
+  name: webAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    siteConfig: {
+      linuxFxVersion: 'DOCKER|${imageName}'
+      appCommandLine: startupCommand
+      appSettings: [
+        { 
+          name: 'WEBSITES_PORT'
+          value: '8080'
+        }
+        {
+          name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
+          value: 'false'
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: appInsights.properties.InstrumentationKey
+        }
+      ]
     }
   }
+}
+
+// Resource: Azure Redis Cache
+resource redisCache 'Microsoft.Cache/Redis@2021-06-01' = {
+  name: redisCacheName
+  location: location
+  properties: {
+    sku: {
+      name: 'Basic'
+      family: 'C'
+      capacity: '0'
+    }
+    enableNonSslPort: false
+  }
+}

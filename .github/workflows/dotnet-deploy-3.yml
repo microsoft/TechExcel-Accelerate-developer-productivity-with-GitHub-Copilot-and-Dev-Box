@@ -67,7 +67,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://{your_prefix}-dev.azurewebsites.net/
+      url: https://bw2wpkzuzoaum-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'

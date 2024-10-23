@@ -17,6 +17,10 @@ defaults:
     shell: bash
     working-directory: ./src/Application/src/RazorPagesTestSample
 
+permissions:
+  id-token: write
+  contents: read
+  
 env:
   ACR_NAME: 'f3jiczwhl7laimpnpreg.azurecr.io'
   CONTAINER_NAME: 'razorpagestestsample'

@@ -76,7 +76,9 @@ jobs:
         uses: azure/login@v2.1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+      - name: 'Set Azure Subscription'
+        run: az account set --subscription 603ecea2-5a0b-430a-9ebe-c3a104afbdfa
+      
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'monusonu-dev'

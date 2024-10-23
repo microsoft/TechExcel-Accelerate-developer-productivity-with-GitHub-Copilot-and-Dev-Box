@@ -1,7 +1,7 @@
 name: .NET CI
 
 env:
-  registryName: {your_registry_name}.azurecr.io
+  registryName: 5kv5dakhwoxksmpnpreg.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
@@ -33,18 +33,6 @@ jobs:
       run: dotnet build --no-restore ./src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal ./src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
-    - uses: actions/github-script@v6
-      if: failure()
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          let body = "${{ env.build_name }} Workflow Failure \n Build Number: ${{ github.run_number }} \n Build Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} \n SHA: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) \n";
-          github.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
-            body: body
-          });
       
   dockerBuildPush:
     runs-on: ubuntu-latest
@@ -79,7 +67,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://{your_prefix}-dev.azurewebsites.net/
+      url: https://5kv5dakhwoxks-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'
@@ -89,8 +77,8 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: '{your_prefix}-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          app-name: '5kv5dakhwoxks-dev'
+          images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -98,7 +86,7 @@ jobs:
     needs: deploy-to-dev
     environment:
       name: test
-      url: https://{your_prefix}-test.azurewebsites.net/
+      url: https://5kv5dakhwoxks-test.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -110,8 +98,8 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: '5kv5dakhwoxks-test'
+        images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -119,7 +107,7 @@ jobs:
     needs: deploy-to-test
     environment:
       name: prod
-      url: https://{your_prefix}-prod.azurewebsites.net/
+      url: https://5kv5dakhwoxks-prod.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -131,5 +119,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: '5kv5dakhwoxks-prod'
+        images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

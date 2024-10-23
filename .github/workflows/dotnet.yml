@@ -24,6 +24,7 @@ permissions:
 env:
   ACR_NAME: 'f3jiczwhl7laimpnpreg.azurecr.io'
   CONTAINER_NAME: 'razorpagestestsample'
+  WEB_APP_NAME: 'f3jiczwhl7lai-dev'
   TAG_NAME: ${{ github.sha }}
 
 jobs:
@@ -65,3 +66,16 @@ jobs:
         push: true
         tags: ${{ env.ACR_NAME }}/${{ env.CONTAINER_NAME }}:${{ env.TAG_NAME }}
         file: ./src/Application/src/RazorPagesTestSample/Dockerfile
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploys to 
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.WEB_APP_NAME }}
+        images: '${{ env.ACR_NAME }}/${{ env.CONTAINER_NAME }}:${{ env.TAG_NAME }}'

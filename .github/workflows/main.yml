@@ -1,9 +1,10 @@
-name: .NET CI_wtomaz808
+name: .NET CI_wtomaz8081
 
 env:
   registryName: onfp77x2viod4.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
-
+  dockerFolderPath: /solution/mysolutions
+  tag: ${{ github.run_number }}
 
 on:
   push:

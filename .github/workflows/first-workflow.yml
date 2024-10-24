@@ -1,0 +1,17 @@
+# add a manual trigger to the workflow 
+on:
+  workflow_dispatch:
+    inputs:
+      example_input:
+        description: 'Example input description'
+        required: true
+        default: 'default_value'
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "Step 1 complete!"
+      - name: Step 2
+        run: echo "Step 2 complete!"

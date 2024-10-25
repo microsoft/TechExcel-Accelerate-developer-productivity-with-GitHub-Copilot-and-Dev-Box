@@ -1,0 +1,28 @@
+#This workflow should run on a manual trigger–that is, not triggered by a push or pull request.
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        enable-AzPSSession: true
+
+    - name: Deploy ARM template
+      uses: azure/arm-deploy@v1
+      with:
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        resource-group-name: ${{ secrets.AZURE_RG }}
+        template: src/InfrastructureAsCode/main.bicep

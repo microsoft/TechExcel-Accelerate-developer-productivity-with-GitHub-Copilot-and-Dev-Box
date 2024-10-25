@@ -9,6 +9,7 @@ name: Second Workflow
   # push
   # pull_request
   # schedule
+  # gh workflow run second-workflow.yml --ref new-app-deploy
 on:
   push:
     branches:

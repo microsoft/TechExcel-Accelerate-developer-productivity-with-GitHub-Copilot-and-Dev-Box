@@ -10,6 +10,9 @@ name: Second Workflow
   # pull_request
   # schedule
 on:
+  push:
+    branches:
+      - new-app-deploy
   workflow_dispatch:
   issues:
     types: [opened]

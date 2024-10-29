@@ -3,8 +3,7 @@ name: Manual Deploy ARM
 on:
     workflow_dispatch:
 
-
- env:
+env:
     targetEnv: dev
 
 jobs:

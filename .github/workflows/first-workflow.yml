@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cowsay Ship It
-        uses: peter-evans/cowsay@v1
+        uses: mscoutermarsh/cowsays-action@master
         with:
           message: "Ship it"
           color: magenta

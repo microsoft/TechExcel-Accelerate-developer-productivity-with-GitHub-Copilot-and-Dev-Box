@@ -13,8 +13,10 @@ jobs:
     steps:
       - name: Step 1
         run: echo "Step 1 complete!"
+        env:
+          MY_VAR: "Hello from the environment!"
       - name: Step 2
-        run: echo "Step 2 complete and here is the message: $MY_VAR"
+        run: echo "Step 2 complete and here is the message"
 
   job2:
     runs-on: ubuntu-latest

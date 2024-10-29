@@ -1,0 +1,10 @@
+name: First Workflow
+
+jobs:
+  echo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step1
+        run: echo "Step 1 Complete"
+      - name: Step2
+        run: echo "Step 1 Complete"

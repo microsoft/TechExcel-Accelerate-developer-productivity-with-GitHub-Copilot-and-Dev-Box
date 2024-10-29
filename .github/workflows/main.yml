@@ -1,10 +1,11 @@
 name: Azure Bicep
 
 on:
-  workflow_dispatch
-
-env:
-  targetEnv: dev
+  workflow_dispatch:
+    inputs:
+      targetEnv:
+        description: 'dev'     
+        required: true
 
 jobs:
   build-and-deploy:
@@ -32,4 +33,4 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./src/InfrastructureAsCode/main.bicep
-        parameters: environment=${{ env.targetEnv }}
+        parameters: environment=${{ github.event.inputs.targetEnv }}

@@ -11,3 +11,11 @@ jobs:
                 run: echo "Step 1 complete"
               - name: Run a script
                 run: echo "Step 2 complete"
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Cowsay Hello
+              uses:  mscoutermarsh/cowsays-action@master
+              with:
+                    text: "Ready for prod-ship it!"
+                    color: "magenta"

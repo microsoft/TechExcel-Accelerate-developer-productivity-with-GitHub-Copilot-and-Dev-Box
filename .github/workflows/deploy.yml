@@ -26,6 +26,8 @@ jobs:
             tenant-id: ${{secrets.AZURE_TENANT_ID}}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             enable-AzPSSession: true
+          env:
+            AZURE_LOGIN_PRE_CLEANUP: true
 
         - name: Deploy ARM Template
           uses: azure/arm-deploy@v1

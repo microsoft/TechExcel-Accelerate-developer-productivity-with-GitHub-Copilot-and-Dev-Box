@@ -1,7 +1,15 @@
 name: Azure Bicep
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      appenv:
+        type: choice
+        description: Choose the target environment
+        options: 
+          - dev
+          - test
+          - prod
 
 env:
   targetEnv: dev

@@ -1,0 +1,22 @@
+name: First Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Step 1
+        run: echo "This is Step 1"
+      - name: Echo Step 2
+        run: echo "This is Step 2"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cowsays
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: "Ready for prod LOL"
+          color: "mangenta"

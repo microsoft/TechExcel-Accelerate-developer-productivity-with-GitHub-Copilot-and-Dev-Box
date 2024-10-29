@@ -4,16 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Run a simple script
-      run: echo "This workflow was manually triggered!"
-
+  
   job1:
     runs-on: ubuntu-latest
 
@@ -29,7 +20,7 @@ jobs:
 
     steps:
     - name: Cowsays Action
-      uses: peter-evans/cowsay@v1
+      uses: peter-evans/cowsay-action@v1
       with:
         text: "Ready for prod–ship it!"
         color: magenta

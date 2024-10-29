@@ -31,7 +31,7 @@ jobs:
       run: |
         az deployment group create \
           --resource-group ${{ secrets.AZURE_RG }} \
-          --template-file src/Application/main.bicep \
+          --template-file src/InfrastructureAsCode/main.bicep \
           --parameters environment=${{ github.event.inputs.environment }}
 
     - name: Output results

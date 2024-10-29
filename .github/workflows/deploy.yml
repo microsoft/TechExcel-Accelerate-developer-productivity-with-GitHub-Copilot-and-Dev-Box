@@ -6,6 +6,11 @@ on:
 env:
     targetEnv: dev
 
+permissions:
+  id-token: write
+  contents: read
+
+
 jobs:
     deploy:
         runs-on: ubuntu-latest

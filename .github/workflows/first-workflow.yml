@@ -4,10 +4,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  echo-job:
+  job1:
     runs-on: ubuntu-latest
     steps:
       - name: Step1
         run: echo "Step 1 Complete"
       - name: Step2
         run: echo "Step 1 Complete"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cowsay Ship It
+        uses: peter-evans/cowsay@v1
+        with:
+          message: "Ship it"
+          color: magenta

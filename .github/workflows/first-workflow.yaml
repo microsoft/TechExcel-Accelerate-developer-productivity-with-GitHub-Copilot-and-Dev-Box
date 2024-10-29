@@ -1,0 +1,26 @@
+name: First Workflow
+
+on: 
+    workflow_dispatch:
+        issues:
+            types: [opened]
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: step one
+              run: echo "Log from step one"
+              env:
+                VARIABLE_NAME: value
+            - name: step two
+              run: echo "Log from step two"
+    job2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Cowsays
+                uses: mscoutermarsh/cowsays-action@master
+                with:
+                    text: 'Ready to prod-ship it!'
+                    color: 'magenta'
+        

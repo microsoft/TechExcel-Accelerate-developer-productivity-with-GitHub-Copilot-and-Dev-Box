@@ -15,22 +15,15 @@ jobs:
       run: echo "Step 1 complete!"
 
     - name: Step two
-      run: echo "Step 1 complete!"
+      run: echo "Step 2 complete!"
       
-#   job2:
-#     # Job 2 will only run after job 1 completes.
-#     # Removing this 'needs' section would make the jobs run simultaneously.
-#     needs: job1
-#     runs-on: ubuntu-latest
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Cowsays
-#       # The 'uses' command executes a remote GitHub action.
-#       # A command like mscoutermarsh/cowsays-action means you can
-#       # find this code at https://github.com/mscoutermarsh/cowsays-action
-#       uses: mscoutermarsh/cowsays-action@master
-#       # The 'with' block includes parameters that the workflow will pass
-#       # to this action. Parameters are all in key-value format.
-#       with:
-#         text: 'Ready for prod--ship it!'
-#         color: 'magenta'
+    steps:
+    - name: Cowsays
+      uses: mscoutermarsh/cowsays-action@master
+      with:
+        text: 'Ready for prod--ship it!'
+        color: 'magenta'

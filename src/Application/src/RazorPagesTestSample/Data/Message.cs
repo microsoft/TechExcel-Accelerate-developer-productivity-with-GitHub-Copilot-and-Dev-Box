@@ -7,6 +7,7 @@ namespace RazorPagesTestSample.Data
     {
         public int Id { get; set; }
 
+        // Max length of message configured below.
         [Required]
         [DataType(DataType.Text)]
         [StringLength(250, ErrorMessage = "There's a 250 character limit on messages. Please shorten your message.")]
@@ -14,3 +15,4 @@ namespace RazorPagesTestSample.Data
     }
     #endregion
 }
+ 

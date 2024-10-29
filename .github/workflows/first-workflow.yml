@@ -16,8 +16,8 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     steps:
-      - name: Cow says
-        uses: cowsays/action@v1
+      - name: Cow says            
+        uses: mscoutermarsh/cowsays-action@v1
         with:
           text: "Ready for prod–ship it!"
           color: magenta

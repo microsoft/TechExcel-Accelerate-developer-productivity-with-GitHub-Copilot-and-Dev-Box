@@ -2,6 +2,8 @@ name: Manual Trigger Workflow
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   

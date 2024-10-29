@@ -1,13 +1,9 @@
 name: First Workflow
 
 on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
-    workflow_dispatch: # Add this line to enable manual triggering
+    workflow_dispatch:
+    issues:
+        types: [opened]
 
 jobs:
   build:

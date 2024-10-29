@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       targetEnv:
-        description: 'dev'     
+        description: 'Azure environment name, e.g. dev, test, prod'    
         required: true
+        default: 'dev'
 
 jobs:
   build-and-deploy:

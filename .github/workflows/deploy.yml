@@ -3,7 +3,7 @@ name: Azure Bicep
 on: workflow_dispatch
 
 env:
-  targetEnv: test
+  targetEnv: prod
 
 jobs:
   build-and-deploy:

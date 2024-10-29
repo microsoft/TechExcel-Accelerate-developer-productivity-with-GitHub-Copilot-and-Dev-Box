@@ -10,14 +10,16 @@ jobs:
     steps:
       - name: Echo Job 1
         env:
-          MY_SECRET_VAR: ${{ secrets.MY_SECRET_VAR }}
-        run: echo $MY_SECRET_VAR
+          SECRET: ${{ secrets.MY_SECRET_VAR }}
+        run: echo $SECRET
 
   job2:
     runs-on: ubuntu-latest
     steps:
     - name: Ship it
       uses: mscoutermarsh/cowsays-action@master
+      env:
+          MY_VAR: ${{ secrets.SECRET }}
       with:
-        text: 'Ready for prod–ship it! ${{ env.MY_VAR }}'
+        text: 'Ready for prod–ship it! myvar=$MY_VAR'
         color: 'magenta'

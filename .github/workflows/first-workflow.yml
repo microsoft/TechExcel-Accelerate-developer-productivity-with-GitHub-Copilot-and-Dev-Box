@@ -1,0 +1,31 @@
+name: First Workflow
+
+on:
+    push:
+      branches:
+        - main
+    pull_request:
+      branches:
+        - main
+    workflow_dispatch: # Add this line to enable manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run a one-line script
+      run: echo "Hello, GitHub Actions!"
+
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step 1
+      run: echo "Step 1 complete!"
+
+    - name: Step 2
+      run: echo "Step 2 complete!"

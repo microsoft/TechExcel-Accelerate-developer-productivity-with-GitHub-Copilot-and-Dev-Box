@@ -1,0 +1,39 @@
+name: Deploy Azure Resources
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v2
+      with:
+        enable-AzPSSession: true
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        federated-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Deploy Bicep file
+      run: |
+        az deployment group create \
+          --resource-group ${{ secrets.AZURE_RG }} \
+          --template-file src/Application/main.bicep \
+          --parameters environment=${{ github.event.inputs.environment }}
+
+    - name: Output results
+      run: |
+        echo "App Service Name: $(az deployment group show --resource-group ${{ secrets.AZURE_RG }} --name <deployment-name> --query properties.outputs.appServiceName.value -o tsv)"
+        echo "App Service URL: $(az deployment group show --resource-group ${{ secrets.AZURE_RG }} --name <deployment-name> --query properties.outputs.appServiceUrl.value -o tsv)"
+        echo "Container Registry Name: $(az deployment group show --resource-group ${{ secrets.AZURE_RG }} --name <deployment-name> --query properties.outputs.containerRegistryName.value -o tsv)"

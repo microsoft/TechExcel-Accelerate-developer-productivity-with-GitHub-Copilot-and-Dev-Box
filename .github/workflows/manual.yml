@@ -13,10 +13,10 @@ jobs:
       run: echo "Step 2 complete!"
 
   job2:
-  runs-on: ubuntu-latest
-  steps:
-  - name: Cowsays Action
-    uses: mscoutermarsh/cowsays-action@v1
-    with:
-      text: "Ready for prod–ship it!"
-      color: magenta
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cowsays Action
+      uses: mscoutermarsh/cowsays-action@v1
+      with:
+        text: "Ready for prod–ship it!"
+        color: magenta

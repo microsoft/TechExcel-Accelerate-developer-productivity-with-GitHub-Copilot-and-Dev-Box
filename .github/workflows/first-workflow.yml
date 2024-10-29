@@ -1,0 +1,35 @@
+name: Manual Trigger Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run a simple script
+      run: echo "This workflow was manually triggered!"
+
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Step 1
+      run: echo "Step 1 complete!"
+
+    - name: Step 2
+      run: echo "Step 2 complete!"
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cowsays Action
+      uses: peter-evans/cowsay@v1
+      with:
+        text: "Ready for prod–ship it!"
+        color: magenta

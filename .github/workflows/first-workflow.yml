@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Cowsays Action
-      uses: peter-evans/cowsay-action@v1
+      uses: mscoutermarsh/cowsays-action@master
       with:
         text: "Ready for prod–ship it!"
         color: magenta

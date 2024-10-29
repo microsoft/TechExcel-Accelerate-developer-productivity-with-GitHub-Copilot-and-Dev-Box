@@ -4,6 +4,9 @@ name: First Workflow
 on:
   workflow_dispatch:
 
+env:
+  MY_VAR: "Hello from the environment!"
+
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -11,7 +14,7 @@ jobs:
       - name: Step 1
         run: echo "Step 1 complete!"
       - name: Step 2
-        run: echo "Step 2 complete!"
+        run: echo "Step 2 complete and here is the message: $MY_VAR"
 
   job2:
     runs-on: ubuntu-latest
@@ -19,5 +22,5 @@ jobs:
       - name: Cow says            
         uses: mscoutermarsh/cowsays-action@v1
         with:
-          text: "Ready for prod–ship it!"
+          text: "Ready for prod–ship it! ${{ env.MY_VAR }}"
           color: magenta

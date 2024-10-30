@@ -62,28 +62,28 @@ namespace RazorPagesTestSample.Pages
             return RedirectToPage();
         }
 
-public async Task<IActionResult> OnPostAnalyzeMessagesAsync()
-{
-    Messages = await _db.GetMessagesAsync();
+        public async Task<IActionResult> OnPostAnalyzeMessagesAsync()
+        {
+            Messages = await _db.GetMessagesAsync();
 
-    if (Messages.Count == 0)
-    {
-        MessageAnalysisResult = "There are no messages to analyze.";
-    }
-    else
-    {
-        // Remove the speed loop for actual performance optimization
-        // for (int i = 0; i < 3000; i++) {
-        //     await Task.Delay(1);
-        // }
+            if (Messages.Count == 0)
+            {
+                MessageAnalysisResult = "There are no messages to analyze.";
+            }
+            else
+            {
+                // Remove the speed loop for actual performance optimization
+                // for (int i = 0; i < 3000; i++) {
+                //     await Task.Delay(1);
+                // }
 
-        var totalWords = Messages.Sum(message => message.Text.Split(' ').Length);
-        var avgWordCount = Decimal.Divide(totalWords, Messages.Count);
-        MessageAnalysisResult = $"The average message length is {avgWordCount:0.##} words.";
-    }
+                var totalWords = Messages.Sum(message => message.Text.Split(' ').Length);
+                var avgWordCount = Decimal.Divide(totalWords, Messages.Count);
+                MessageAnalysisResult = $"The average message length is {avgWordCount:0.##} words.";
+            }
 
-    return RedirectToPage();
-}
+            return RedirectToPage();
+        }
 
         public static void WriteToDirectory(ZipArchiveEntry entry, string destDirectory)
         {

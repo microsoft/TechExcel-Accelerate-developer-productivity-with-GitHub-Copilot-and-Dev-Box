@@ -1,0 +1,7 @@
+* @global-owner1 @global-owner2
+/docs/ @docs-owner
+/src/ @src-owner
+README.md @readme-owner
+*.js @js-owner
+*.css @css-owner
+/scripts/*.sh @scripts-owner

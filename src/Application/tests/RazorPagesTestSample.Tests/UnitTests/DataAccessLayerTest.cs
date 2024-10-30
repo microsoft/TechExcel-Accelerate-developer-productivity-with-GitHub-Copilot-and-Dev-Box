@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using RazorPagesTestSample.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesTestSample.Tests.UnitTests
 {
@@ -27,6 +28,31 @@ namespace RazorPagesTestSample.Tests.UnitTests
                 Assert.Equal(
                     expectedMessages.OrderBy(m => m.Id).Select(m => m.Text), 
                     actualMessages.OrderBy(m => m.Id).Select(m => m.Text));
+            }
+        }
+
+        [Theory]
+        [InlineData(150, true)]
+        [InlineData(199, true)]
+        [InlineData(200, true)]
+        [InlineData(201, true)]
+        [InlineData(249, true)]
+        [InlineData(250, true)]
+        [InlineData(251, false)]
+        [InlineData(300, false)]
+        public async Task AddMessageAsync_TestMessageLength(int messageLength, bool expectedValidMessage)
+        {
+            using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = 10;
+                var expectedMessage = new Message() { Id = recId, Text = new string('X', messageLength) };
+
+                // Act
+                var isValidMessage = Validator.TryValidateObject(expectedMessage, new ValidationContext(expectedMessage), null, validateAllProperties: true);
+
+                // Assert
+                Assert.Equal(expectedValidMessage, isValidMessage);
             }
         }
 

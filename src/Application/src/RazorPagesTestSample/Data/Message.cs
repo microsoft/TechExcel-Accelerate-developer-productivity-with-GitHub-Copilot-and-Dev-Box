@@ -17,7 +17,7 @@ namespace RazorPagesTestSample.Data
         /// The text must be a valid string and is required. If the text exceeds 250 characters, an error message will be displayed.
         /// </remarks>
         /// <exception cref="ValidationException">
-        /// Thrown when the text exceeds 250 characters or is not provided.
+        /// Thrown when the text exceeds 250 characters or  is not provided.
         /// </exception>
         /// /// /// /// /// /// /// /// /// /// /// /// [Required]
         [DataType(DataType.Text)]

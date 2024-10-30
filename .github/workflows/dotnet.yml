@@ -8,6 +8,7 @@ env:
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
+  build_name: 'DotnetCoreApp'
   
 on:
   push:

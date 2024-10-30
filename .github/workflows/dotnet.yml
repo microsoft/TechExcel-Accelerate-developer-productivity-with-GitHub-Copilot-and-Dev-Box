@@ -24,6 +24,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: List stuff
+      run: pwd && ls -la
     - name: Restore dependencies
       run: dotnet restore src/Application/src/RazorPagesTestSample\RazorPagesTestSample.csproj
     - name: Build

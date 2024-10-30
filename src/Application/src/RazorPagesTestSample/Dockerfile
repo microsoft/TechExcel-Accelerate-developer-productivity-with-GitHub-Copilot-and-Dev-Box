@@ -20,5 +20,5 @@ ENV ASPNETCORE_HTTP_PORTS=80
 # ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
 
-# Start the application
+# Start the application 
 ENTRYPOINT ["dotnet", "RazorPagesTestSample.dll"]

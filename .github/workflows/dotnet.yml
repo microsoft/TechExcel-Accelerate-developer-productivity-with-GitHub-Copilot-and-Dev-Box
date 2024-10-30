@@ -15,6 +15,10 @@ on:
   workflow_dispatch:
 
 
+permissions:
+  id-token: write
+  contents: read
+              
 env:
       registryName: "q3zpru2gmy754mpnpreg.azurecr.io" # Replace registryName with the name of your registry
       repositoryName: "techexcel/dotnetcoreapp"

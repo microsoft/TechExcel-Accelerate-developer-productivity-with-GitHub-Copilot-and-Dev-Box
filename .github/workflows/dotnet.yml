@@ -4,7 +4,7 @@
 name: .NET
 
 env:
-  registryName: {your_registry_name}.azurecr.io
+  registryName: jo37jiy66vx2ympnpreg.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
@@ -55,22 +55,22 @@ jobs:
       - uses: actions/checkout@v3
     
       - name: Docker Login
-      # You may pin to the exact commit or the version.
-      # uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-      uses: docker/login-action@v1.9.0
-      with:
-        # Server address of Docker registry. If not set then will default to Docker Hub
-        registry: ${{ secrets.ACR_LOGIN_SERVER }}
-        # Username used to log against the Docker registry
-        username: ${{ secrets.ACR_USERNAME }}
-        # Password or personal access token used to log against the Docker registry
-        password: ${{ secrets.ACR_PASSWORD }}
-        # Log out from the Docker registry at the end of a job
-        logout: true
-        
+        # You may pin to the exact commit or the version.
+        # uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        uses: docker/login-action@v1.9.0
+        with:
+          # Server address of Docker registry. If not set then will default to Docker Hub
+          registry: ${{ secrets.ACR_LOGIN_SERVER }}
+          # Username used to log against the Docker registry
+          username: ${{ secrets.ACR_USERNAME }}
+          # Password or personal access token used to log against the Docker registry
+          password: ${{ secrets.ACR_PASSWORD }}
+          # Log out from the Docker registry at the end of a job
+          logout: true
+
       - name: Docker Build
         run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
-      
+
       - name: Docker Push
         run: docker push $registryName/$repositoryName:$tag
 
@@ -80,7 +80,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://{your_prefix}-dev.azurewebsites.net/
+      url: https://jo37jiy66vx2y-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'
@@ -90,7 +90,7 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: '{your_prefix}-dev'
+          app-name: 'jo37jiy66vx2y-dev'
           images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
@@ -99,7 +99,7 @@ jobs:
     needs: deploy-to-dev
     environment:
       name: test
-      url: https://{your_prefix}-test.azurewebsites.net/
+      url: https://jo37jiy66vx2y-test.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -111,7 +111,7 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-test'
+        app-name: 'jo37jiy66vx2y-test'
         images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
@@ -120,7 +120,7 @@ jobs:
     needs: deploy-to-test
     environment:
       name: prod
-      url: https://{your_prefix}-prod.azurewebsites.net/
+      url: https://jo37jiy66vx2y-prod.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -132,5 +132,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: 'jo37jiy66vx2y-prod'
+        images: jo37jiy66vx2ympnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

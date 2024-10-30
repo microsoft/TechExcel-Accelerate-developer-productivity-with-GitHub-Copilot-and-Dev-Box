@@ -66,3 +66,22 @@ jobs:
       
     - name: Docker Push
       run: docker push $registryName/$repositoryName:$tag
+  
+  deploy-to-dev:
+  
+    runs-on: ubuntu-latest
+    needs: dockerBuildPush
+    environment:
+      name: dev
+      url: https://esheacqtiuyhy-dev.azurewebsites.net/
+    
+    steps:
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v2.2.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'esheacqtiuyhy-dev'
+          images: $registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

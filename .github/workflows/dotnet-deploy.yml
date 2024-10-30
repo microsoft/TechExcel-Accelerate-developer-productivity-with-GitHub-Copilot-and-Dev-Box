@@ -1,7 +1,7 @@
 name: .NET CI
 
 env:
-  registryName: secrets.ACR_LOGIN_SERVER
+  registryName: ${{ secrets.ACR_LOGIN_SERVER }}
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}

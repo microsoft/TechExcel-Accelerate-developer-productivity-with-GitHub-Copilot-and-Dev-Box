@@ -68,7 +68,7 @@ namespace RazorPagesTestSample.Pages
 
             if (Messages.Count == 0)
             {
-                MessageAnalysisResult = "There are no messages to analyze.";
+                MessageAnalysisResult = "FEAURE BNEOIT There are no messages to analyze.";
             }
             else
             {
@@ -86,7 +86,7 @@ namespace RazorPagesTestSample.Pages
                 }
 
                 var avgWordCount = Decimal.Divide(wordCount, Messages.Count);
-                MessageAnalysisResult = $"The average message length is {avgWordCount:0.##} words.";
+                MessageAnalysisResult = $"FEAURE BNEOIT  The average message length is {avgWordCount:0.##} words.";
             }
 
             return RedirectToPage();

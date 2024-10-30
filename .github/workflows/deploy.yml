@@ -120,4 +120,4 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'p5tgcusa4unsu-prod'
-        images: p5tgcusa4unsumpnpreg.azurecr.io /techexcel/dotnetcoreapp:${{github.run_number}}
+        images: p5tgcusa4unsumpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

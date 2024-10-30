@@ -47,34 +47,34 @@ jobs:
             body: body
           });
           
-    dockerBuildPush:
-      runs-on: ubuntu-latest
-      needs: build
+  dockerBuildPush:
+    runs-on: ubuntu-latest
+    needs: build
 
-      steps:
-      - uses: actions/checkout@v3
+    steps:
+    - uses: actions/checkout@v3
     
-      - name: Docker Login
-        # You may pin to the exact commit or the version.
-        # uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-        uses: docker/login-action@v1.9.0
-        with:
-          # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: ${{ secrets.ACR_LOGIN_SERVER }}
-          # Username used to log against the Docker registry
-          username: ${{ secrets.ACR_USERNAME }}
-          # Password or personal access token used to log against the Docker registry
-          password: ${{ secrets.ACR_PASSWORD }}
-          # Log out from the Docker registry at the end of a job
-          logout: true
+    - name: Docker Login
+      # You may pin to the exact commit or the version.
+      # uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+      uses: docker/login-action@v1.9.0
+      with:
+        # Server address of Docker registry. If not set then will default to Docker Hub
+        registry: ${{ secrets.ACR_LOGIN_SERVER }}
+        # Username used to log against the Docker registry
+        username: ${{ secrets.ACR_USERNAME }}
+        # Password or personal access token used to log against the Docker registry
+        password: ${{ secrets.ACR_PASSWORD }}
+        # Log out from the Docker registry at the end of a job
+        logout: true
 
-      - name: Docker Build
-        run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
+    - name: Docker Build
+      run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
 
-      - name: Docker Push
-        run: docker push $registryName/$repositoryName:$tag
+    - name: Docker Push
+      run: docker push $registryName/$repositoryName:$tag
 
-    deploy-to-dev:
+  deploy-to-dev:
   
     runs-on: ubuntu-latest
     needs: dockerBuildPush
@@ -91,7 +91,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'jo37jiy66vx2y-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: jo37jiy66vx2ympnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -112,7 +112,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'jo37jiy66vx2y-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: jo37jiy66vx2ympnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   

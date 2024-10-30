@@ -12,6 +12,8 @@ on:
     branches: [ "main" ]
     paths:
       - 'src/Application/**'
+  workflow_dispatch:
+
 
 jobs:
   build:

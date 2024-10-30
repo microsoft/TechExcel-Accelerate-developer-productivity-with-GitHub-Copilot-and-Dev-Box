@@ -53,4 +53,4 @@
           resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./src/InfrastructureAsCode/main.bicep
           # Use the environment variable called targetEnv
-          parameters: environment=$targetEnv
+          parameters: environment=${{ env.targetEnv }}

@@ -79,7 +79,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://{your_prefix}-dev.azurewebsites.net/
+      url: https://bmoussaudlebo-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'
@@ -89,7 +89,7 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: '{your_prefix}-dev'
+          app-name: 'bmoussaudlebo-dev'
           images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
@@ -98,7 +98,7 @@ jobs:
     needs: deploy-to-dev
     environment:
       name: test
-      url: https://{your_prefix}-test.azurewebsites.net/
+      url: https://bmoussaudlebo-test.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -110,7 +110,7 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-test'
+        app-name: 'bmoussaudlebo-test'
         images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
@@ -119,7 +119,7 @@ jobs:
     needs: deploy-to-test
     environment:
       name: prod
-      url: https://{your_prefix}-prod.azurewebsites.net/
+      url: https://bmoussaudlebo-prod.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -131,5 +131,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-prod'
+        app-name: 'bmoussaudlebo-prod'
         images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

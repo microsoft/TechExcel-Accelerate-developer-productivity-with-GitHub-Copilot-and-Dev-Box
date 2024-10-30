@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
+// added a comment
 namespace RazorPagesTestSample.Data
 {
     public class AppDbContext : DbContext

@@ -35,16 +35,17 @@ namespace RazorPagesTestSample.Tests.UnitTests
         {
             using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
             {
-                // Arrange
+                 // Arrange
                 var recId = 10;
                 var expectedMessage = new Message() { Id = recId, Text = "Message" };
 
                 // Act
                 await db.AddMessageAsync(expectedMessage);
+                var fakeMessage = new Message() { Id = recId, Text = "Invalid!" };
 
                 // Assert
                 var actualMessage = await db.FindAsync<Message>(recId);
-                Assert.Equal(expectedMessage, actualMessage);
+                Assert.Equal(fakeMessage, actualMessage);
             }
         }
 

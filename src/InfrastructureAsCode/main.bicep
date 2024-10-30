@@ -15,6 +15,21 @@ var imageName = 'techexcel/dotnetcoreapp'
 var startupCommand = ''
 
 
+var redisCacheName = '${uniqueString(resourceGroup().id)}-mpnp-redis'
+
+resource redisCache 'Microsoft.Cache/Redis@2021-06-01' = {
+  name: redisCacheName
+  location: location
+  properties: {
+    sku: {
+      name: 'Basic'
+      family: 'C'
+      capacity: 0
+    }
+    enableNonSslPort: false
+  }
+}
+
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
   name: logAnalyticsName
   location: location

@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="Moq" Version="4.20.70" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="xunit" Version="2.7.0" />

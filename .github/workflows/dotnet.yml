@@ -84,4 +84,4 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'esheacqtiuyhy-dev'
-          images: $registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: esheacqtiuyhympnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

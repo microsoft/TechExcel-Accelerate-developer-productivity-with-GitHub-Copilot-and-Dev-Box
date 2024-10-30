@@ -1,0 +1,7 @@
+# Code owners for the repository
+
+- @sven-pohl
+
+# Specify sven-pohl as the owner for the /src/Application/ directory
+
+/Application/ @sven-pohl

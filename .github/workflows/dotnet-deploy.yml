@@ -90,7 +90,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: '{your_prefix}-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -111,7 +111,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -132,4 +132,4 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: ut3bnazh3pnt6mpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

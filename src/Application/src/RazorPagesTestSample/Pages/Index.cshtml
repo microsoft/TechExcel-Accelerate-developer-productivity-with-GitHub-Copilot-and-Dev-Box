@@ -12,7 +12,7 @@
         <form method="post">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Add a message</h3>
+                    <h3 class="panel-title">Add a new message</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -36,7 +36,8 @@
         <form method="post">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
-                    <button type="submit" asp-page-handler="DeleteAllMessages" class="pull-right btn btn-danger">Clear All</button>
+                    <button type="submit" asp-page-handler="DeleteAllMessages" class="pull-right btn btn-danger">Clear
+                        All</button>
                     <h3 class="panel-title" style="line-height:2.1">Messages</h3>
                 </div>
                 <div class="panel-body">
@@ -44,7 +45,8 @@
                         @foreach (var message in Model.Messages)
                         {
                             <li style="line-height:2.4">
-                                <button type="submit" class="btn btn-danger" style="margin-bottom:2px" asp-page-handler="DeleteMessage" asp-route-id="@message.Id">Delete</button>
+                                <button type="submit" class="btn btn-danger" style="margin-bottom:2px"
+                                    asp-page-handler="DeleteMessage" asp-route-id="@message.Id">Delete</button>
                                 @message.Text
                             </li>
                         }
@@ -66,7 +68,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <button type="submit" asp-page-handler="AnalyzeMessages" class="btn btn-default">Analyze</button>
+                        <button type="submit" asp-page-handler="AnalyzeMessages"
+                            class="btn btn-default">Analyze</button>
                     </div>
                     <div class="form-group">
                         @Model.MessageAnalysisResult

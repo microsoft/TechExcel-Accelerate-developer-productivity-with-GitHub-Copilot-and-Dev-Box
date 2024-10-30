@@ -2,10 +2,7 @@ name: Azure Bicep
 
 on:
   workflow_dispatch
-
-env:
-  targetEnv: dev
-
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

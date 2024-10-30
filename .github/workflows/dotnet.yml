@@ -80,3 +80,75 @@ jobs:
           --docker-registry-server-url https://${{ env.registryName }} \
           --docker-registry-server-user ${{ secrets.ACR_USERNAME }} \
           --docker-registry-server-password ${{ secrets.ACR_PASSWORD }}
+
+          deploytodev:
+            runs-on: ubuntu-latest
+            needs: buildacr
+            environment: dev
+        
+            steps:
+            - uses: actions/checkout@v4
+        
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+                
+        
+            - name: Deploy to Azure Web App
+              run: |
+                az webapp config container set \
+                  --name q3zpru2gmy754-dev \
+                  --resource-group ${{ secrets.AZURE_RG }} \
+                  --docker-custom-image-name ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }} \
+                  --docker-registry-server-url https://${{ env.registryName }} \
+                  --docker-registry-server-user ${{ secrets.ACR_USERNAME }} \
+                  --docker-registry-server-password ${{ secrets.ACR_PASSWORD }}
+
+  deploytotest:
+    runs-on: ubuntu-latest
+    needs: deploytodev
+    environment: test
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+
+    - name: Deploy to Azure Web App
+      run: |
+        az webapp config container set \
+          --name q3zpru2gmy754-test \
+          --resource-group ${{ secrets.AZURE_RG }} \
+          --docker-custom-image-name ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }} \
+          --docker-registry-server-url https://${{ env.registryName }} \
+          --docker-registry-server-user ${{ secrets.ACR_USERNAME }} \
+          --docker-registry-server-password ${{ secrets.ACR_PASSWORD }}
+
+  deploytoprod:
+    runs-on: ubuntu-latest
+    needs: deploytotest
+    environment: prod
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+
+    - name: Deploy to Azure Web App
+      run: |
+        az webapp config container set \
+          --name q3zpru2gmy754-prod \
+          --resource-group ${{ secrets.AZURE_RG }} \
+          --docker-custom-image-name ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }} \
+          --docker-registry-server-url https://${{ env.registryName }} \
+          --docker-registry-server-user ${{ secrets.ACR_USERNAME }} \
+          --docker-registry-server-password ${{ secrets.ACR_PASSWORD }}

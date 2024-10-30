@@ -1,8 +1,8 @@
 # Update the base and SDK images to .NET 8
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://+:80
 
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

@@ -39,3 +39,33 @@ We prefer all communications to be in English.
 Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://aka.ms/security.md/cvd).
 
 <!-- END MICROSOFT SECURITY.MD BLOCK -->
+# Security Policy
+
+## Supported Versions
+
+We release patches for security vulnerabilities. Which versions are eligible for receiving such patches depends on the CVSS v3.0 Rating:
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability, please follow these steps:
+
+1. **Do not open an issue**: This ensures that the vulnerability is not publicly disclosed before a fix is available.
+2. **Send an email to [security@example.com](mailto:security@example.com)**: Provide as much detail as possible about the vulnerability and how it can be exploited.
+3. **Expect a response within 48 hours**: We will acknowledge the receipt of your report and provide a timeline for a fix.
+
+## Security Updates
+
+We will notify users about security updates through:
+
+- GitHub Releases
+- Email notifications (if subscribed)
+
+## Security Resources
+
+- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+- [CWE/SANS Top 25](https://cwe.mitre.org/top25/archive/2020/2020_cwe_top25.html)

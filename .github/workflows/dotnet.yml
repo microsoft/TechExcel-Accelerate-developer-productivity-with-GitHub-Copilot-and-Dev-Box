@@ -29,7 +29,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -45,7 +44,7 @@ jobs:
 
   buildacr:
     runs-on: ubuntu-latest
-    
+    needs: build
     steps:
     - uses: actions/checkout@v4
   

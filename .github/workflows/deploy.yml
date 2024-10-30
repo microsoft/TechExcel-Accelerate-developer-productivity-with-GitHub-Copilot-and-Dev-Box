@@ -33,3 +33,6 @@ jobs:
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./src/InfrastructureAsCode/main.bicep
         parameters: environment=${{ env.targetEnv }}
+
+
+

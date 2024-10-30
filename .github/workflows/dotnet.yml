@@ -15,6 +15,12 @@ on:
   workflow_dispatch:
 
 
+env:
+      registryName: "q3zpru2gmy754mpnpreg.azurecr.io" # Replace registryName with the name of your registry
+      repositoryName: "techexcel/dotnetcoreapp"
+      dockerFolderPath: "src/Application/src/RazorPagesTestSample"
+      tag: ${{ github.run_number }}
+
 jobs:
   build:
 
@@ -32,3 +38,17 @@ jobs:
       run: dotnet build src/Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --no-restore
     - name: Test
       run: dotnet test src/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
+
+  buildacr:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+  
+    - name: Login to Azure Container Registry
+      run: echo "${{ secrets.ACR_PASSWORD }}" | docker login ${{ env.registryName }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
+
+    - name: Build and push Docker image
+      run: |
+        docker build ${{ env.dockerFolderPath }} -t ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}
+        docker push ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}

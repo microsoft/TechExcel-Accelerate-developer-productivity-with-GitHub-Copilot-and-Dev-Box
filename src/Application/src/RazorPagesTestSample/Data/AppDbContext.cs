@@ -3,12 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesTestSample.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) 
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
@@ -28,6 +29,9 @@ namespace RazorPagesTestSample.Data
         #region snippet2
         public async virtual Task AddMessageAsync(Message message)
         {
+            var validationContext = new ValidationContext(message);
+            Validator.ValidateObject(message, validationContext, validateAllProperties: true);
+
             await Messages.AddAsync(message);
             await SaveChangesAsync();
         }
@@ -40,7 +44,7 @@ namespace RazorPagesTestSample.Data
             {
                 Messages.Remove(message);
             }
-            
+
             await SaveChangesAsync();
         }
         #endregion
@@ -62,7 +66,8 @@ namespace RazorPagesTestSample.Data
         {
             // Speed loop. Lower this number once every quarter so we
             // get our performance improvement quarterly bonus.
-            for (int i = 0; i < 1500; i++) {
+            for (int i = 0; i < 1500; i++)
+            {
                 Thread.Sleep(1);
             }
             Messages.AddRange(GetSeedingMessages());

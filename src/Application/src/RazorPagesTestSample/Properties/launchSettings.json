@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RazorPagesTestSample": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:65407;http://localhost:65408"
+    }
+  }
+}

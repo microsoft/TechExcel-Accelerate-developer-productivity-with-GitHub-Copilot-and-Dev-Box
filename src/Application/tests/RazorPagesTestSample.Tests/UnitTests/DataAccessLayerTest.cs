@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using RazorPagesTestSample.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesTestSample.Tests.UnitTests
 {
@@ -45,6 +46,46 @@ namespace RazorPagesTestSample.Tests.UnitTests
                 // Assert
                 var actualMessage = await db.FindAsync<Message>(recId);
                 Assert.Equal(expectedMessage, actualMessage);
+            }
+        }
+
+        [Theory]
+        [InlineData(150)]
+        [InlineData(199)]
+        [InlineData(200)]
+        [InlineData(201)]
+        [InlineData(249)]
+        [InlineData(250)]
+        public async Task AddMessageAsync_MessageIsBelowLengthLimit(int messageLength)
+        {
+            using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = 10;
+                var expectedMessage = new Message() { Id = recId, Text = GetLongMessage(messageLength, "This is a Message") };
+
+                // Act
+                await db.AddMessageAsync(expectedMessage);
+
+                // Assert
+                var actualMessage = await db.FindAsync<Message>(recId);
+                Assert.True(expectedMessage.Text.Length <= 250);
+            }
+        }
+
+        [Theory]
+        [InlineData(251)]
+        [InlineData(300)]
+        public async Task AddMessageAsync_MessageIsAboveLengthLimit(int messageLength)
+        {
+            using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = 10;
+                var expectedMessage = new Message() { Id = recId, Text = GetLongMessage(messageLength, "This is a Message") };
+
+                // Act & Assert
+                await Assert.ThrowsAsync<ValidationException>(async () => await db.AddMessageAsync(expectedMessage));
             }
         }
 
@@ -124,6 +165,16 @@ namespace RazorPagesTestSample.Tests.UnitTests
                     expectedMessages.OrderBy(m => m.Id).Select(m => m.Text), 
                     actualMessages.OrderBy(m => m.Id).Select(m => m.Text));
             }
+        }
+        private string GetLongMessage(int length, string sampleMessage)
+        {
+            if (string.IsNullOrEmpty(sampleMessage) || length <= 0)
+            {
+                return string.Empty;
+            }
+
+            var repeatedMessage = string.Concat(Enumerable.Repeat(sampleMessage, (length / sampleMessage.Length) + 1));
+            return repeatedMessage.Substring(0, length);
         }
         #endregion
     }

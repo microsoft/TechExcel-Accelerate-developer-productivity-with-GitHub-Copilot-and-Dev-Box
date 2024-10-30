@@ -1,0 +1,6 @@
+# CODEOWNERS file
+# This file designates code owners for specific directories or files
+*  @fwickert
+
+# fwickert owns the /src/Application/ directory
+/src/Application/ @fwickert

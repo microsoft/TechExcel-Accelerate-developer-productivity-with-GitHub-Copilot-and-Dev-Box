@@ -1,4 +1,4 @@
-name: Azure Bicep
+name: Azure Bicep By Benoit
 
 on:
   workflow_dispatch

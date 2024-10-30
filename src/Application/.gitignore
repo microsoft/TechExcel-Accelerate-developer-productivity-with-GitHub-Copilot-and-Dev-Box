@@ -223,6 +223,9 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+# Local configuration file for developers
+src/Application/src/RazorPagesTestSample/config.json
+
 # GhostDoc plugin setting file
 *.GhostDoc.xml
 

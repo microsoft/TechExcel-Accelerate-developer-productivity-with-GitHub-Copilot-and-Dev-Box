@@ -77,4 +77,44 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: "kqrfo3r42nm3u-dev"
-          images: $registryName/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: kqrfo3r42nm3umpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-test:
+    runs-on: ubuntu-latest
+    needs: deploy-to-dev
+    environment:
+      name: test
+      url: https://kqrfo3r42nm3u-test.azurewebsites.net/
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v2.1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: "kqrfo3r42nm3u-test"
+          images: kqrfo3r42nm3umpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    needs: deploy-to-test
+    environment:
+      name: prod
+      url: https://kqrfo3r42nm3u-prod.azurewebsites.net/
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v2.1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: "kqrfo3r42nm3u-prod"
+          images: kqrfo3r42nm3umpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

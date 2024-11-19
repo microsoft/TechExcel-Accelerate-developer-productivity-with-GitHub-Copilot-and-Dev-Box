@@ -67,7 +67,7 @@ jobs:
     needs: dockerBuildPush
     environment:
       name: dev
-      url: https://5kv5dakhwoxks-dev.azurewebsites.net/
+      url: https://rltuztndcef7c-dev.azurewebsites.net/
     
     steps:
       - name: 'Login via Azure CLI'
@@ -77,8 +77,8 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: '5kv5dakhwoxks-dev'
-          images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          app-name: 'rltuztndcef7c-dev'
+          images: rltuztndcef7cmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -86,7 +86,7 @@ jobs:
     needs: deploy-to-dev
     environment:
       name: test
-      url: https://5kv5dakhwoxks-test.azurewebsites.net/
+      url: https://rltuztndcef7c-test.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -98,8 +98,8 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '5kv5dakhwoxks-test'
-        images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: 'rltuztndcef7c-test'
+        images: rltuztndcef7cmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -107,7 +107,7 @@ jobs:
     needs: deploy-to-test
     environment:
       name: prod
-      url: https://5kv5dakhwoxks-prod.azurewebsites.net/
+      url: https://rltuztndcef7c-prod.azurewebsites.net/
     
     steps:
     - uses: actions/checkout@v3
@@ -119,5 +119,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '5kv5dakhwoxks-prod'
-        images: 5kv5dakhwoxksmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        app-name: 'rltuztndcef7c-prod'
+        images: rltuztndcef7cmpnpreg.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}

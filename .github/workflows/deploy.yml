@@ -1,4 +1,4 @@
-
+@description('Environment of the web app')
 param environment string = 'dev'
 
 @description('Location of services')

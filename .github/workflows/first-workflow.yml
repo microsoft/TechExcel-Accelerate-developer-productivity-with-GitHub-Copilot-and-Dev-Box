@@ -15,3 +15,7 @@ jobs:
     steps:
       - name: Echo Job 2
         run: echo "This is the second job"
+      - name: CowSays Action
+        uses: peter-evans/cowsay@v1
+        with:
+          message: "Moo!"

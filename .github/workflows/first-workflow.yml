@@ -15,7 +15,12 @@ jobs:
     steps:
       - name: Echo Job 2
         run: echo "This is the second job"
-      - name: CowSays Action
-        uses: peter-evans/cowsay@v1
+      - name: CowSays 
+        # You may pin to the exact commit or the version.
+        # uses: mscoutermarsh/cowsays-action@822c8424f7ebc1f4c8b86b0bcb11e4051b7f42e2
+        uses: mscoutermarsh/cowsays-action@v1
         with:
-          message: "Moo!"
+          # What does the cow say?
+          text: # optional, default is Ship it!!!!!
+          # Color of your cow
+          color: # optional, default is white

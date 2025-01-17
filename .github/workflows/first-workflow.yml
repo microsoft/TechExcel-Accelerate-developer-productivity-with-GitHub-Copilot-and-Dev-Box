@@ -26,4 +26,4 @@ jobs:
           # What does the cow say?
             text: ${{ env.message }}
           # Color of your cow
-          color: # optional, default is white
+          color: # optional, default is white 

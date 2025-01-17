@@ -18,9 +18,9 @@ jobs:
       - name: CowSays 
         # You may pin to the exact commit or the version.
         # uses: mscoutermarsh/cowsays-action@822c8424f7ebc1f4c8b86b0bcb11e4051b7f42e2
-        uses: mscoutermarsh/cowsays-action@v1
+        uses: mscoutermarsh/cowsays-action@master
         with:
           # What does the cow say?
-          text: # optional, default is Ship it!!!!!
+          text: optional, default is Ship it!!!!!
           # Color of your cow
           color: # optional, default is white

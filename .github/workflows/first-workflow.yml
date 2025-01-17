@@ -26,8 +26,8 @@ jobs:
         uses: mscoutermarsh/cowsays-action@v1
         with:
           # What does the cow say?
-          text: Ready for Prod - Ship it!!!!!
+          text: 'Ready for Prod - Ship it!!!!!'
           # Color of your cow
-          color: magenta
+          color: 'magenta'
 
             

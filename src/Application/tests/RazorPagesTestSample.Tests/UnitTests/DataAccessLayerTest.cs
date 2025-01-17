@@ -125,6 +125,31 @@ namespace RazorPagesTestSample.Tests.UnitTests
                     actualMessages.OrderBy(m => m.Id).Select(m => m.Text));
             }
         }
+
+        [Theory]
+        [InlineData(10)]
+        [InlineData(50)]
+        [InlineData(100)]
+        [InlineData(250)]
+        public async Task AddMessageAsync_MessageIsAdded_WithVariousLengths(int length)
+        {
+            using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
+            {
+            // Arrange
+            var recId = 10;
+            var text = new string('a', length);
+            var expectedMessage = new Message() { Id = recId, Text = text };
+
+            // Act
+            await db.AddMessageAsync(expectedMessage);
+
+            // Assert
+            var actualMessage = await db.FindAsync<Message>(recId);
+            Assert.Equal(expectedMessage, actualMessage);
+            Assert.Equal(length, actualMessage.Text.Length);
+            }
+        }
+
         #endregion
     }
 }

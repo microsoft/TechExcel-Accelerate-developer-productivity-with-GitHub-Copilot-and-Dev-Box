@@ -1,4 +1,6 @@
 name: First Workflow
+env:
+  message: "Custom message goes here!"
 
 on:
   workflow_dispatch:
@@ -22,6 +24,6 @@ jobs:
         uses: mscoutermarsh/cowsays-action@master
         with:
           # What does the cow say?
-          text: optional, default is Ship it!!!!!
+            text: ${{ env.message }}
           # Color of your cow
           color: # optional, default is white
